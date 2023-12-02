@@ -33,7 +33,6 @@ ALLOWED_HOSTS = ['8000-georgieegglet-skischool-4twav3wbrrb.ws-eu106.gitpod.io']
 # Application definition
 
 
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,6 +45,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount', #for social media which we will use later
     'home',
+    'lessons',
 ]
 
 MIDDLEWARE = [
