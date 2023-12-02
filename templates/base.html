@@ -22,7 +22,7 @@
     {% endblock %}
 
     {% block corejs %}
-    <script src="https://kit.fontawesome.com/e9c73d7092.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/21d71eb4a8.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
@@ -31,14 +31,14 @@
     {% block extra_js %}
     {% endblock %}
 
-    <title>Ski School!! {% block extra_title %}{% endblock %}</title>
+    <title>Alps Ski School {% block extra_title %}{% endblock %}</title>
   </head>
   <body>
     <header class="container-fluid fixed-top">
         <div id="topnav" class="row bg-white pt-lg-2 d-none d-lg-flex">
             <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
                 <a href="{% url 'home' %}" class="nav-link main-logo-link">
-                    <h2 class="logo-font text-black my-0">SKI School!!</h2>
+                    <h2 class="logo-font text-blue my-0"><strong>Alps</strong> Snow School</h2>
                 </a>
             </div>
             <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
@@ -58,7 +58,7 @@
             <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
                 <ul class="list-inline list-unstyled text-center text-lg-right my-0">
                     <li class="list-inline-item dropdown">
-                        <a class="text-black nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="text-blue nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="text-center">
                                 <div><i class="fas fa-user fa-lg"></i></div>
                                 <p class="my-0">My Account</p>
@@ -78,7 +78,7 @@
                         </div>
                     </li>
                     <li class="list-inline-item">
-                        <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="#">
+                        <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-blue{% endif %} nav-link" href="#">
                             <div class="text-center">
                                 <div><i class="fas fa-shopping-bag fa-lg"></i></div>
                                 <p class="my-0">
@@ -103,11 +103,7 @@
                 {% include 'includes/main-nav.html' %}
             </nav>
         </div>
-        <div id="delivery-banner" class="row text-center">
-            <div class="col bg-black text-white">
-                <h4 class="logo-font my-1">Free hospital care!!!! ${{ free_delivery_threshold }}!</h4>                
-            </div>            
-        </div>
+    
     </header>
     {% if messages %}
         <div class="message-container"></div>
@@ -121,6 +117,22 @@
 
     {% block postloadjs %}
     {% endblock %}
+    <footer class="container-fluid">
+        <div class="row">
+            <div class="col-4 pt-3">
+                <p class="text-white"><span class="icon"><i class="fas fa-phone fa-lg text-white"></i></span> +41 111 222 333 44</p>
+                <p class="text-white"><span class="icon"><i class="fas fa-envelope fa-lg text-white"></i></span> lesson@alpsskischool.com</p>
+                <p class="text-white"><span class="icon"><i class="fas fa-solid fa-house fa-lg text-white"></i></span> Alps Ski School, Alps, Switzerland, Europe</p>
+            </div>
+        <div class="col-12">
+            <p class="text-white text-center">
+                © Alps Ski School 2023 
+            </p>
+        </div>
+        
+        </div>
 
+      
+    </footer>
   </body>
 </html>
