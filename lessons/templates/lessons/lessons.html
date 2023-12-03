@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header%}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col">
+
+            </div>
+        </div>
+    </div>
+{% endblock%}
+
+{% block content %}
+
+
+<div class="row"></div>
+    {% for L in lessontype %}
+    <div class="col-sm-1 col-md-1 col-lg-2 col-xl-3">
+        <div>
+            {{ L.age_range }} 
+            {%if L.max_capacity > 1 %}
+                Group 
+                {% else %}
+                Private 
+            {% endif %} 
+            {{ L.discipline }}
+            Lesson
+            </div>
+        <img class="card-img-top img-fluid" src="{{ L.image.url }}" >
+        <div> {{ L.description }} </div> 
+        <div> £{{ L.price }} </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}
