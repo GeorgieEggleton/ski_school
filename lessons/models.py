@@ -23,7 +23,11 @@ class LessonType(models.Model):
     level = models.CharField(null=False, blank=False, max_length=128, default = 'unselected', choices=[('Beginner', 'Beginner'), ('Intermediate', 'Intermediate'), ('Advanced', 'Advanced')])
 
     def __str__(self):
-        return f"{self.max_capacity} person capacity  {self.age_range} {self.discipline} lesson"
+        if self.max_capacity > 1:
+            type = 'Group'
+        else:
+            type = 'Individual'
+        return f"{type} {self.age_range} {self.discipline} lesson"
 
 class LiftPass(models.Model):
 

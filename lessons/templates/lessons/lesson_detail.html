@@ -37,7 +37,7 @@
                 <p><strong>Available Dates/Times:</strong></p>
                 <select class="form-control rounded-0 w-200" name="selected_dates" id='id_product_size'>
                     {% for lesson in lessons %}
-                    <option value="{{ lesson }}">{{ lesson.date_time }} - Places Available: {{ lesson.type.max_capacity}}</option>
+                    <option value="{{ lesson.id }}">{{ lesson.date_time }} - Places Available: {{ lesson.type.max_capacity}}</option>
                     {% endfor %}
                 </select>
 
