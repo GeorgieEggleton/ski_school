@@ -8,8 +8,8 @@ class LessonType(models.Model):
     discipline = models.CharField(null=False, blank=False, max_length=128, help_text='Select Ski or Snowboard')
     age_range = models.CharField(null=False, blank=False, max_length=128)
     max_capacity = models.IntegerField(null=False, blank=False, default=0)
-    brief_description = models.TextField(null=True, blank=True, max_length=300)
-    description = models.TextField(null=True, blank=True)
+    brief_description = models.TextField(null=True, blank=True, max_length=300, default = "")
+    description = models.TextField(null=True, blank=True, default = "")
     price = models.DecimalField(max_digits=6, null=False, blank=False, decimal_places=2)
     image = models.ImageField(null=True, blank=True)
 

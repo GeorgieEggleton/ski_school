@@ -15,8 +15,8 @@
 
 
 <div class="row"></div>
-    {% for L in lessontype %}
-    <div class="col-sm-1 col-md-1 col-lg-2 col-xl-3">
+    {% for L in lessontypes %}
+    <div class="col-sm-1 col-md-5 col-lg-2 col-xl-5">
         <div>
             {{ L.age_range }} 
             {%if L.max_capacity > 1 %}
@@ -27,8 +27,10 @@
             {{ L.discipline }}
             Lesson
             </div>
-        <img class="card-img-top img-fluid" src="{{ L.image.url }}" >
-        <div> {{ L.description }} </div> 
+        <a href="{% url 'lesson_detail' L.id %}">
+            <img class="card-img-top img-fluid" src="{{ L.image.url }}" >
+        </a>
+        <div> {{ L.brief_description }} </div> 
         <div> £{{ L.price }} </div>
     </div>
     {% endfor %}
