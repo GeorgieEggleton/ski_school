@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import LessonType, Student, LiftPass, Lesson
+from .models import LessonType, Student, LiftPass, Lesson, Discipline
 
 class LessonTypeAdmin(admin.ModelAdmin):
     list_display = (
@@ -36,9 +36,19 @@ class LessonAdmin(admin.ModelAdmin):
 
     ordering = ('date_time',)
 
+class DisciplineAdmin(admin.ModelAdmin):
+    list_display = (
+        'name',
+        
+    )
+
+    ordering = ('name',)
+    
+
 
 # Register your models here.
 admin.site.register(LessonType, LessonTypeAdmin)
 admin.site.register(Student, StudentAdmin)
 admin.site.register(LiftPass, LiftPassAdmin)
 admin.site.register(Lesson, LessonAdmin)
+admin.site.register(Discipline, DisciplineAdmin)

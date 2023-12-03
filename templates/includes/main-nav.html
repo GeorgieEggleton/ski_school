@@ -11,10 +11,10 @@
                 Ski
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="skiLessons-link">
-                <a href="#" class="dropdown-item">Kid Group Lessons</a>
-                <a href="#" class="dropdown-item">Kid Private Lessons</a>
-                <a href="#" class="dropdown-item">Adult Group Lessons</a>
-                <a href="#" class="dropdown-item">Adult Private Lesson</a>
+                <a href="{% url 'all_lessons' %}?type=Ski,Child,group" class="dropdown-item">Kid Group Lessons</a>
+                <a href="{% url 'all_lessons' %}?type=Ski,Child,private" class="dropdown-item">Kid Private Lessons</a>
+                <a href="{% url 'all_lessons' %}?type=Ski,Adult,group" class="dropdown-item">Adult Group Lessons</a>
+                <a href="{% url 'all_lessons' %}?type=Ski,Adult,private" class="dropdown-item">Adult Private Lesson</a>
             </div>
         </li>
 
@@ -23,10 +23,10 @@
                 Snowboard
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="snowboardLessons-link">
-                <a href="#" class="dropdown-item">Kid Group Lessons</a>
-                <a href="#" class="dropdown-item">Kid Private Lessons</a>
-                <a href="#" class="dropdown-item">Adult Group Lessons</a>
-                <a href="#" class="dropdown-item">Adult Private Lesson</a>
+                <a href="{% url 'all_lessons' %}?type=Snowboard,Child,group" class="dropdown-item">Kid Group Lessons</a>
+                <a href="{% url 'all_lessons' %}?type=Snowboard,Child,private" class="dropdown-item">Kid Private Lessons</a>
+                <a href="{% url 'all_lessons' %}?type=Snowboard,Adult,group" class="dropdown-item">Adult Group Lessons</a>
+                <a href="{% url 'all_lessons' %}?type=Snowboard,Adult,private" class="dropdown-item">Adult Private Lesson</a>
             </div>
         </li>
 
