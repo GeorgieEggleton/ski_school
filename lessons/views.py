@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.contrib import messages
 from django.db.models import Q
-from .models import LessonType
+from .models import LessonType, Lesson
 
 
 def all_lessons(request):
@@ -9,8 +9,7 @@ def all_lessons(request):
     type = None
     lessonTypes = LessonType.objects.all()
     print(lessonTypes)
-    
-    
+       
     
     if request.GET:
         if 'type' in request.GET:
@@ -41,12 +40,13 @@ def all_lessons(request):
     return render(request, 'lessons/lessons.html', context)
 
 def lesson_detail(request, lessonType_id):
-    
+    lessons = None
     lessonType = get_object_or_404(LessonType, pk=lessonType_id)
-    print(lessonType)
-    
+    lessons = Lesson.objects.filter(type__in=lessonType_id)
+    print(lessons[0].date_time)  
     context = {
         'lessontype' : lessonType,
+        'lessons' : lessons
     }
     
     return render(request, 'lessons/lesson_detail.html', context)

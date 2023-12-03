@@ -40,13 +40,14 @@ class Student(models.Model):
     first_name = models.CharField(null=False, blank=False, max_length=128) 
     last_name = models.CharField(null=False, blank=False, max_length=128)
     age = models.IntegerField(null=False, blank=False, default=0)
-    #userAccount = models.OneToOanyField(User, null=True, on_delete=models.CASCADE)
+    #userAccount = models.OneToManyField(User, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.first_name}  {self.last_name}"
 
 class Lesson(models.Model):
     students = models.ManyToManyField(Student, blank=True)
+    places_taken = models.IntegerField(null=True, blank=False, default=0)
     date_time = models.DateTimeField()
     kit_req = models.IntegerField(null=True, blank=False, default=0)
     lift_pass = models.ForeignKey('LiftPass',null=True, blank=True, on_delete=models.SET_NULL)
@@ -54,6 +55,7 @@ class Lesson(models.Model):
 
     def __str__(self):
         return f"{self.date_time}  {self.type.discipline}"
+
 
 
 

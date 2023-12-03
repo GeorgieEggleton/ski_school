@@ -16,7 +16,7 @@
 
 <div class="row"></div>
 
-<div class="col-sm-1 col-md-1 col-lg-1 col-xl-5">
+<div class="col-sm-12 col-md-12 col-lg-12 col-xl-5">
     <div>
         {{ lessontype.age_range }}
         {%if lessontype.max_capacity > 1 %}
@@ -30,6 +30,42 @@
     <img class="card-img-top img-fluid" src="{{ lessontype.image.url }}">
     <div> {{ lessontype.description }} </div>
     <div> £{{ lessontype.price }} </div>
+    <form class="form" action="{% url 'add_to_bag' lessontype.id %}" method="POST">
+        {% csrf_token %}
+        <div class="form-row">
+           
+                <p><strong>Available Dates/Times:</strong></p>
+                <select class="form-control rounded-0 w-200" name="selected_dates" id='id_product_size'>
+                    {% for lesson in lessons %}
+                    <option value="{{ lesson }}">{{ lesson.date_time }} - Places Available: {{ lesson.type.max_capacity}}</option>
+                    {% endfor %}
+                </select>
+
+                <div class="col-12">
+                    <p class="mt-3"><strong>Quantity:</strong></p>
+                    <div class="form-group w-50">
+                        <div class="input-group">
+                            <input class="form-control qty_input" type="number" name="quantity" value="1" min="1" max="99"
+                                data-item_id="#" id="#">
+                        </div>
+                    </div>
+                </div>
+                <div>
+
+
+            </div>
+            <div class="col-12">
+                <a href="{% url 'all_lessons' %}" class="btn btn-outline-black rounded-0 mt-5">
+                    <span class="icon">
+                        <i class="fas fa-chevron-left"></i>
+                    </span>
+                    <span class="text-uppercase">Return to Lessons</span>
+                </a>
+                <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5" value="Add to Bag">
+            </div>
+            <input type="hidden" name="redirect_url" value="{{ request.path }}">
+        </div>
+    </form>
 </div>
 
 {% endblock %}
