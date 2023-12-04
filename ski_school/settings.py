@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'home',
     'lessons',
     'bag',
+    'checkout',
 ]
 
 MIDDLEWARE = [
@@ -102,6 +103,8 @@ TEMPLATES = [
         },
     },
 ]
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 WSGI_APPLICATION = 'ski_school.wsgi.application'
 

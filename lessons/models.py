@@ -57,8 +57,14 @@ class Lesson(models.Model):
     lift_pass = models.ForeignKey('LiftPass',null=True, blank=True, on_delete=models.SET_NULL)
     type = models.ForeignKey(LessonType, on_delete=models.CASCADE, related_name="lesson") 
 
+
     def __str__(self):
-        return f"{self.date_time}  {self.type.discipline}"
+        if self.type.max_capacity > 1:
+            type = 'Group'
+        else:
+            type = 'Individual'
+
+        return f"{self.type.age_range} {type} {self.type.discipline} lesson at {self.date_time.strftime("%H%M on %a %d %B %Y")}"
 
     """"def __init__(self, *args, **kwargs):
         if self.remaining_capacity == None:

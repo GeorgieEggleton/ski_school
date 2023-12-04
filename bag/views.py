@@ -3,6 +3,7 @@ from django.contrib import messages
 from lessons.models import LessonType, Lesson
 
 
+
 def view_bag(request):
     
 
@@ -10,25 +11,23 @@ def view_bag(request):
 
 
 def add_to_bag(request, item_id):
-    """ Add a quantity of the specified product to the shopping bag """
 
-    #product = get_object_or_404(Product, pk=item_id)
+
     quantity = int(request.POST.get('quantity'))
     lesson = request.POST['selected_dates']
     redirect_url = request.POST.get('redirect_url')
     bag = request.session.get('bag', {})
-    print(lesson)
+    lesson_whole = get_object_or_404(Lesson, pk=lesson)
     
     
     if lesson in list(bag.keys()):
         bag[lesson] += quantity
-        messages.success(request, f'Updated {lesson} quantity to {bag[lesson]}')
+        messages.success(request, f'Added {quantity} place on {lesson_whole}')
     else:
         bag[lesson] = quantity
         messages.success(request, f'Added {lesson} to your bag')
     
     request.session['bag'] = bag
-    print( f'Bag: {request.session['bag']}')
     return redirect(redirect_url)
 
 def update_bag(request, lesson_id):
@@ -36,11 +35,13 @@ def update_bag(request, lesson_id):
     lesson = get_object_or_404(Lesson, pk=lesson_id)
     bag = request.session.get('bag', {})
     quantity = int(request.POST.get('quantity'))
-    print(quantity)
+    
     if quantity > 0:
         bag[lesson_id] = quantity
+        messages.info(request, f'Changed number of places on {lesson} to {quantity}')
     else:
         bag.pop(lesson_id)
+        messages.info(request, f'Removed {lesson}')
     request.session['bag'] = bag
     return render(request, 'bag/bag.html')
 
@@ -51,7 +52,7 @@ def remove_from_bag(request, lesson_id):
         lesson = get_object_or_404(Lesson, pk=lesson_id)
         bag = request.session.get('bag', {})
         bag.pop(lesson_id)
-        messages.success(request, f'Removed {lesson} from your bag')
+        messages.info(request, f'Removed {lesson} from your bag')
         request.session['bag'] = bag
         return render(request, 'bag/bag.html')
 
