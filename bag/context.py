@@ -15,13 +15,17 @@ def bag_contents(request):
     for lesson_id, lesson_quantity in bag.items():
         if isinstance(lesson_quantity, int):        
             lesson = get_object_or_404(Lesson, pk=lesson_id)
-            total += lesson_quantity * lesson.type.price
+            if lesson.remaining_capacity < lesson_quantity:
+                    lesson_quantity = lesson.remaining_capacity
+            subTotal = lesson_quantity * lesson.type.price 
+            total += subTotal
             bag_items.append({
                 'lesson_id': lesson_id,
                 'lesson_quantity': lesson_quantity,
                 'lesson' : lesson,
                 'formatted_lessontime' : lesson.date_time.strftime("%H%M on %a %d %m %Y"),
-                'formatted_lesson_id' : f' {lesson.date_time.strftime("%y")}-{lesson_id}'
+                'formatted_lesson_id' : f' {lesson.date_time.strftime("%y")}-{lesson_id}',
+                'subTotal' : subTotal,
             })
 
     context = {

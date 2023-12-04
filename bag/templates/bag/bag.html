@@ -34,54 +34,33 @@
                         <p class="my-0 small text-muted">lesson time/date: {{ item.formatted_lessontime }}</p>
                         <p class="my-0 small text-muted">lesson id number: {{ item.formatted_lesson_id }}</p>
                     </td>
-                    <td class="py-3">
-                        <p class="my-0">${{ item.lesson.type.price }}</p>
-                    </td>
+
                     <td class="py-3 w-25">
-                        <form class="form update-form" method="POST" action="#">
+                        {% if item.lesson.remaining_capacity > 1 %}
+                        <form class="form" method="POST" action="{% url 'update_bag' item.lesson_id %}">
                             {% csrf_token %}
                             <div class="form-group">
                                 <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <button class="decrement-qty btn btn-sm btn-black rounded-0"
-                                            data-item_id="{{ item.lesson_id }}" id="decrement-qty_{{ item.lesson_id }}">
-                                            <span>
-                                                <i class="fas fa-minus fa-sm"></i>
-                                            </span>
-                                        </button>
-                                    </div>
-
                                     <input class="form-control form-control-sm qty_input" type="number" name="quantity"
-                                        value="{{ item.quantity }}" min="1" max="99" data-item_id="{{ item.lesson_id }}"
+                                        value="{{ item.lesson_quantity }}" min="1" max="{{ item.lesson.remaining_capacity }}" data-item_id="{{ item.lesson_id }}"
                                         id="id_qty_{{ item.lesson_id }}">
-
-                                    <div class="input-group-append">
-                                        <button class="increment-qty btn btn-sm btn-black rounded-0"
-                                            data-item_id="{{ item.lesson_id }}" id="decrement-qty_{{ item.lesson_id }}">
-                                            <span>
-                                                <i class="fas fa-plus fa-sm"></i>
-                                            </span>
-                                        </button>
-                                    </div>
-
                                 </div>
                             </div>
+                            <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5" value="update">
                         </form>
-                        <a class="update-link text-info"><small>Update</small></a>
-                        <a class="remove-item text-danger float-right" id="remove_{{ item.item_id}}"
-                            data-product_size="{{ item.sze }}"><small>Remove</small></a>
+                        {% endif %}
+                        <form class="form delete-form text-danger float-right" method="POST" action="{% url 'remove_from_bag' item.lesson_id %}"> {% csrf_token %}
+                            <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5" value="remove">
+                        </form>
                     </td>
                     <td class="py-3">
-                        <p class="my-0">${{ item.lesson.type.price }}</p>
+                        <p class="my-0">${{ item.subTotal }}</p>
                     </td>
                 </tr>
                 {% endfor %}
-
-
-
-
-
-
+                <td class="py-3">
+                    <p class="my-0">Total to pay : ${{ total }}</p>
+                </td>
                 {% else %}
                 <p class="lead mb-5"> Your bag is empty. </p>
                 <a href="{% url 'home' %}" class="btn btn-outline-black rounded-0 btn-lg">
@@ -91,7 +70,7 @@
                     <span class="text-uppercase">Keep Shopping</span>
                 </a>
                 {% endif %}
-             
+
             </div>
         </div>
     </div>

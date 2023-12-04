@@ -51,7 +51,7 @@ class Student(models.Model):
 
 class Lesson(models.Model):
     students = models.ManyToManyField(Student, blank=True)
-    places_taken = models.IntegerField(null=True, blank=False, default=0)
+    remaining_capacity = models.IntegerField(null=True, blank=False, default=0)
     date_time = models.DateTimeField()
     kit_req = models.IntegerField(null=True, blank=False, default=0)
     lift_pass = models.ForeignKey('LiftPass',null=True, blank=True, on_delete=models.SET_NULL)
@@ -60,6 +60,8 @@ class Lesson(models.Model):
     def __str__(self):
         return f"{self.date_time}  {self.type.discipline}"
 
-
-
+    """"def __init__(self, *args, **kwargs):
+        if self.remaining_capacity == None:
+                self.remaining_capacity = self.type.max_capacity
+    """
 

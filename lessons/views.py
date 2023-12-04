@@ -50,3 +50,5 @@ def lesson_detail(request, lessonType_id):
     }
     
     return render(request, 'lessons/lesson_detail.html', context)
+
+
