@@ -3,8 +3,8 @@ html {
 }
 
 body {
-   
-    height: calc(100vh - 164px);
+    margin-top: 140px !important;
+    /*height: calc(100vh - 164px)!important;*/
     color: #555;
     font-family: 'Lato';
     border-top: #17a2b8 4px solid;
@@ -13,13 +13,11 @@ body {
 .container {
     width: 100%;
     position: relative;
-    margin-top: 40px !important;
   }
 
 .image-container {
     width: 100%;
     position: relative;
-    margin-top: 50px !important;
   }
   
   .image-container img {
@@ -78,7 +76,9 @@ hr{
     width: 80%;
 } 
 
-
+.text-col {
+    margin: 20px;
+}
 /*Footer*/
 footer {
     height: 200px;
@@ -364,7 +364,7 @@ input[name='q']::placeholder {
     }
 
     .image-container{
-        margin-top: 75px !important;
+        /*margin-top: 75px !important;*/
     }
 
     .home-header{
