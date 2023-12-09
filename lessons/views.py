@@ -8,20 +8,25 @@ def all_lessons(request):
     query = None
     type = None
     lessonTypes = LessonType.objects.all()
-    print(lessonTypes)
-       
-    
+   
     if request.GET:
         if 'type' in request.GET:
             types = request.GET['type'].split(',')
             print(types)
             lessonTypes = lessonTypes.filter()
-            if types[2] == 'private':
-                lessonTypes = lessonTypes.filter(discipline__name__in=types, age_range__in=types, max_capacity=1)
-            elif types[2] == 'group':
-                lessonTypes = lessonTypes.filter(discipline__name__in=types, age_range__in=types, max_capacity__gt=1)
-            else:
-                lessonTypes = ""
+            """[disapline,age,capacity] Ski,,"""
+            
+            try:
+                if types[2] == 'private':
+                    lessonTypes = lessonTypes.filter(Q(discipline__name__in=types) | Q(age_range__in=types) | Q(max_capacity=1))
+                elif types[2] == 'group':
+                    lessonTypes = lessonTypes.filter(Q(discipline__name__in=types) | Q(age_range__in=types) | Q(max_capacity__gt=1))
+                elif types[2] == '':
+                    lessonTypes = lessonTypes = lessonTypes.filter(Q(discipline__name__in=types) | Q(age_range__in=types))
+                else:
+                    lessonTypes = None
+            except:
+                messages.error(request, "invalid search")
             print(lessonTypes)
     
     
@@ -31,10 +36,12 @@ def all_lessons(request):
                 messages.error(request, "you didn't enter anything")
                 return redirect(reverse('all_lessons'))
             queries = Q(discipline__icontains=query) | Q(brief_description__icontains=query) | Q(age_range__icontains=query) | Q(level__icontains=query)
+            print(queries)
             lessonTypes = lessonTypes.filter(queries)
     context = {
         'lessontypes' : lessonTypes,
-        'search_term' : query
+        'search_term' : query,
+        'discipline' : types[0],
     }
     
     return render(request, 'lessons/lessons.html', context)

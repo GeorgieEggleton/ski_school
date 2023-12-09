@@ -2,37 +2,92 @@
 {% load static %}
 
 {% block page_header%}
-    <div class="container header-container">
-        <div class="row">
-            <div class="col">
+<div class="container header-container">
+    <div class="row">
+        <div class="col">
 
-            </div>
         </div>
     </div>
+</div>
 {% endblock%}
 
 {% block content %}
-
-
-<div class="row"></div>
-    {% for L in lessontypes %}
-    <div class="col-sm-1 col-md-5 col-lg-2 col-xl-5">
-        <div>
-            {{ L.age_range }} 
-            {%if L.max_capacity > 1 %}
-                Group 
-                {% else %}
-                Private 
-            {% endif %} 
-            {{ L.discipline }}
-            Lesson
-            </div>
-        <a href="{% url 'lesson_detail' L.id %}">
-            <img class="card-img-top img-fluid" src="{{ L.image.url }}" >
-        </a>
-        <div> {{ L.brief_description }} </div> 
-        <div> £{{ L.price }} </div>
+<div class="image-container">
+    <picture>
+        <source  media="(max-width: 991px)" srcset="/media/IMG_3703_2.jpg">
+        <img class="img-fluid" src="/media/IMG_3703.jpg" alt="image">
+    </picture>
+    <div class="overlay-text col-lg-6 col-sm-10 offset-lg-5 offset-sm-1 h-100">
+        <h1 class="home-header display-4 logo-font text-white">
+            {{ discipline }} Lessons
+        </h1>
+        <h2 class="home-text text-white logo-font"> Our expert team can cater for everything from kids’ & adults group lessons to bespoke 1-2-1 sessions and everything in between!.
+        </h2>
     </div>
+</div>
+
+<div class="container">
+    <div class="row my-auto text-center">
+        <div class="heading text-center col-6 offset-3">
+            <h1>Kids Lessons</h1>
+            <p> Our adult ski lessone are really great whatever your ski ability. Here is some more text about how
+                wonderful they are!</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    {% for L in lessontypes %}
+    {% if L.age_range == "Child" %}
+    <div class="pics col-md-12 col-lg-6 col-xl-6">
+        <div class="card h-100 border-0 lesson-card">
+            <a href="{% url 'lesson_detail' L.id %}">
+                <img class="card-img-top  img-fluid" src="{{ L.image.url }}"
+                    alt="{{ L.age_range }} {%if L.max_capacity > 1 %} Group {% else %} Private {% endif %} {{ L.discipline }} Lesson">
+            </a>
+            <div class="card-body">
+                <h1>{{ L.age_range }} {%if L.max_capacity > 1 %} Group {% else %} Private {% endif %} {{ L.discipline }} Lesson</h1>
+                <p class="card-text">{{ L.brief_description }}</p>
+                    <a href="{% url 'lesson_detail' L.id %}" class="btn btn-primary btn-book">Book Now ></a>    
+            </div>
+        </div>
+    </div>
+    {% endif %}
     {% endfor %}
+</div>
+
+<hr>
+
+
+<div class="container">
+    <div class="row my-auto text-center">
+        <div class="heading text-center col-6 offset-3">
+            <h1>Adults Lessons</h1>
+            <p> Our adult ski lessone are really great whatever your ski ability. Here is some more text about how
+                wonderful they are!</p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    {% for L in lessontypes %}
+    {% if L.age_range == "Adult" %}
+    <div class="pics col-md-12 col-lg-6 col-xl-6">
+        <div class="card h-100 border-0 lesson-card">
+            <a href="{% url 'lesson_detail' L.id %}">
+                <img class="card-img-top  img-fluid" src="{{ L.image.url }}"
+                    alt="{{ L.age_range }} {%if L.max_capacity > 1 %} Group {% else %} Private {% endif %} {{ L.discipline }} Lesson">
+            </a>
+            <div class="card-body">
+                <h1>{{ L.age_range }} {%if L.max_capacity > 1 %} Group {% else %} Private {% endif %} {{ L.discipline }} Lesson</h1>
+                <p class="card-text">{{ L.brief_description }}</p>
+                    <a href="{% url 'lesson_detail' L.id %}" class="btn btn-primary btn-book">Book Now ></a>    
+            </div>
+        </div>
+    </div>
+   
+    {% endif %}
+    {% endfor %}
+    <hr>
+
 
 {% endblock %}
