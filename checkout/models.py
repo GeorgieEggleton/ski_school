@@ -50,9 +50,7 @@ class Order(models.Model):
 class OrderLineItem(models.Model):
     order = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems')
     lesson = models.ForeignKey(Lesson, models.SET_NULL, null=True, blank=True)
-    students = models.ForeignKey(Student, models.SET_NULL, null=True, blank = True)
-    #lift_pass = models.ForeignKey(LiftPass, null=True, blank= True)
-    quantity = models.IntegerField(null=False, blank=False, default=0)
+    students =  models.ManyToManyField(Student, blank=True)
     lineitem_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, editable=False)
 
     def save(self, *args, **kwargs):

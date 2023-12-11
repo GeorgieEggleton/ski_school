@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User #imports the User from the Allauth package
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class Discipline(models.Model):
@@ -44,8 +46,8 @@ class LiftPass(models.Model):
 class Student(models.Model):
     first_name = models.CharField(null=False, blank=False, max_length=128) 
     last_name = models.CharField(null=False, blank=False, max_length=128)
-    age = models.IntegerField(null=False, blank=False, default=0)
-    userAccount = models.ForeignKey(User, null = True, blank = True, on_delete=models.SET_NULL, related_name = 'user')
+    age = models.DateField()
+    userAccount = models.ForeignKey(User, null = True, blank = True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return f"{self.first_name}  {self.last_name} - {self.userAccount.email}"
@@ -59,12 +61,16 @@ class Lesson(models.Model):
     type = models.ForeignKey(LessonType, on_delete=models.CASCADE, related_name="lesson") 
 
 
+
     def save(self, *args, **kwargs):
         
         """Overwrites save method to calculate available places"""
-
-        self.remaining_capacity = self.type.max_capacity - self.students.count()
         super().save(*args, **kwargs)
+        self.remaining_capacity = self.type.max_capacity - self.students.count()
+       
+        super().save(*args, **kwargs)
+    
+    
 
 
 
@@ -77,5 +83,7 @@ class Lesson(models.Model):
 
         return f"{self.type.age_range} {type} {self.type.discipline} lesson at {self.date_time.strftime("%H%M on %a %d %B %Y")}"
 
-
+@receiver(post_save, sender=Lesson)
+def update_stock(sender, instance, **kwargs):
+    print(f"cpacity update { sender.objects.remaining_capacity }")
 
