@@ -5,7 +5,7 @@ from django.db.models import Sum
 from django.conf import settings
 from django_countries.fields import CountryField
 
-from lessons.models import Lesson
+from lessons.models import Lesson, Student
 
 
 class Order(models.Model):
@@ -25,12 +25,16 @@ class Order(models.Model):
     stripe_pid = models.CharField(max_length=254, null=False, blank=False, default='')
 
     def _generate_order_number(self):
+        """generates Order Number """
         
         return uuid.uuid4().hex.upper()
     
 
     def save(self, *args, **kwargs):
         
+        """Overwrites save method to calculate total"""
+
+        self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum'] or 0
         if not self.order_number:
             self.order_number = self._generate_order_number()
         super().save(*args, **kwargs)
@@ -39,20 +43,22 @@ class Order(models.Model):
         
         self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum'] or 0
         self.save()
+    
+    def __str__(self):
+        return self.order_number
 
 class OrderLineItem(models.Model):
     order = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems')
-    lesson = models.ForeignKey(Lesson, null=False, blank=False, on_delete=models.CASCADE)
+    lesson = models.ForeignKey(Lesson, models.SET_NULL, null=True, blank=True)
+    students = models.ForeignKey(Student, models.SET_NULL, null=True, blank = True)
+    #lift_pass = models.ForeignKey(LiftPass, null=True, blank= True)
     quantity = models.IntegerField(null=False, blank=False, default=0)
     lineitem_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, editable=False)
 
     def save(self, *args, **kwargs):
-        """
-        Override the original save method to set the lineitem total
-        and update the order total.
-        """
+
         self.lineitem_total = self.lesson.type.price * self.quantity
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f'SKU {self.product.sku} on order {self.order.order_number}'
+        return f'Lesson {self.lesson} on order {self.order.order_number}'

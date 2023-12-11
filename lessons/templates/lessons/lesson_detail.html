@@ -18,46 +18,51 @@
         <img class="card-img-top img-fluid" src="{{ lessontype.image.url }}">
     </div>
     <div class="col-lg-5 text-col">
-        <div> <h2 class="logo-font text-blue"> {{ lessontype.age_range }} {%if lessontype.max_capacity > 1 %} Group {% else %} Private {% endif %} {{ lessontype.discipline }} Lesson</h2></div>
+        <div>
+            <h2 class="logo-font text-blue"> {{ lessontype.age_range }} {% if lessontype.max_capacity > 1 %} Group
+                {% else %} Private {% endif %} {{ lessontype.discipline }} Lesson</h2>
+        </div>
         <div> {{ lessontype.description }} </div>
         <div class="mt-3"> £{{ lessontype.price }} </div>
-        <p class="mt-3"><strong>Available Dates/Times:</strong></p>
-        <select class="date-update form-control rounded-0 w-200" name="selected_dates" id='id_product_size'>
-            {% for lesson in lessons %}
-            <option value="{{ lesson.id }}">{{ lesson.date_time }} - Places Available: {{ lesson.type.max_capacity}}
-            </option>
-            {% endfor %}
-        </select>
 
-        <div class="col-12">
-            <p class="mt-3"><strong>Quantity:</strong></p>
-            <div class="form-group w-50">
-                <div class="input-group">
-                    <input class="form-control qty_input" type="number" name="quantity" value="1" min="1"
-                        max="{{ lessontype.max_capacity }}" data-item_id="#" id="#">
+        <form class="form" action="{% url 'add_to_bag' lessontype.id %}" method="POST">
+            {% csrf_token %}
+            <div class="form-row">
+
+                <p class="mt-3"><strong>Available Dates/Times:</strong></p>
+                <select class="date-update form-control rounded-0 w-200" name="selected_lesson" id='lesson_date'>
+                    {% for lesson in lessons %}
+                    <option value="{{ lesson.id }}">{{ lesson.date_time }} - Places Available:
+                        {{ lesson.type.max_capacity }}
+                    </option>
+                    {% endfor %}
+                </select>
+
+                <div class="col-12">
+                    <p class="mt-3"><strong>Quantity:</strong></p>
+                    <div class="form-group w-50">
+                        <div class="input-group">
+                            <input class="form-control qty_input" type="number" name="quantity" value="1" min="1"
+                                max="{{ lessontype.max_capacity }}" data-item_id="#" id="#">
+                        </div>
+                    </div>
                 </div>
+                <div class="col-12">
+                    <a href="{% url 'all_lessons' %}" class="btn btn-outline-black rounded-0 mt-5">
+                        <span class="icon">
+                            <i class="fas fa-chevron-left"></i>
+                        </span>
+                        <span class="text-uppercase">Return to Lessons</span>
+                    </a>
+                    <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5" value="Add to Bag">
+                </div>
+                <input type="hidden" name="redirect_url" value="{{ request.path }}">
             </div>
-        </div>
-        <div>
-
-
-        </div>
-        <div class="col-12">
-            <a href="{% url 'all_lessons' %}" class="btn btn-outline-black rounded-0 mt-5">
-                <span class="icon">
-                    <i class="fas fa-chevron-left"></i>
-                </span>
-                <span class="text-uppercase">Return to Lessons</span>
-            </a>
-            <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5" value="Add to Bag">
-        </div>
-        <input type="hidden" name="redirect_url" value="{{ request.path }}">
+        </form>
     </div>
-    </form>
+</div>
 </div>
 
-</div>
-</div>
 
 
 

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User #imports the User from the Allauth package
 
 
 class Discipline(models.Model):
@@ -26,8 +27,8 @@ class LessonType(models.Model):
         if self.max_capacity > 1:
             type = 'Group'
         else:
-            type = 'Individual'
-        return f"{type} {self.age_range} {self.discipline} lesson"
+            type = 'Private'
+        return f"{self.max_capacity} Capacity {self.age_range} {self.discipline} lesson"
 
 class LiftPass(models.Model):
 
@@ -44,30 +45,37 @@ class Student(models.Model):
     first_name = models.CharField(null=False, blank=False, max_length=128) 
     last_name = models.CharField(null=False, blank=False, max_length=128)
     age = models.IntegerField(null=False, blank=False, default=0)
-    #userAccount = models.OneToManyField(User, null=True, on_delete=models.CASCADE)
+    userAccount = models.ForeignKey(User, null = True, blank = True, on_delete=models.SET_NULL, related_name = 'user')
 
     def __str__(self):
-        return f"{self.first_name}  {self.last_name}"
+        return f"{self.first_name}  {self.last_name} - {self.userAccount.email}"
 
 class Lesson(models.Model):
     students = models.ManyToManyField(Student, blank=True)
-    remaining_capacity = models.IntegerField(null=True, blank=False, default=0)
+    remaining_capacity = models.IntegerField(null=True, blank=False, default=0, editable=False)
     date_time = models.DateTimeField()
     kit_req = models.IntegerField(null=True, blank=False, default=0)
     lift_pass = models.ForeignKey('LiftPass',null=True, blank=True, on_delete=models.SET_NULL)
     type = models.ForeignKey(LessonType, on_delete=models.CASCADE, related_name="lesson") 
 
 
+    def save(self, *args, **kwargs):
+        
+        """Overwrites save method to calculate available places"""
+
+        self.remaining_capacity = self.type.max_capacity - self.students.count()
+        super().save(*args, **kwargs)
+
+
+
+
     def __str__(self):
         if self.type.max_capacity > 1:
             type = 'Group'
         else:
-            type = 'Individual'
+            type = 'Private'
 
         return f"{self.type.age_range} {type} {self.type.discipline} lesson at {self.date_time.strftime("%H%M on %a %d %B %Y")}"
 
-    """"def __init__(self, *args, **kwargs):
-        if self.remaining_capacity == None:
-                self.remaining_capacity = self.type.max_capacity
-    """
+
 

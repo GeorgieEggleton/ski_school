@@ -26,12 +26,22 @@ class StudentAdmin(admin.ModelAdmin):
         'age',
     )
 
-
 class LessonAdmin(admin.ModelAdmin):
     list_display = (
         '__str__',
         'date_time',
         'type',
+        'remaining_capacity',
+    )
+
+    readonly_fields = ('remaining_capacity',)
+
+    fields = ('students', 
+        'remaining_capacity', 
+        'date_time', 
+        'kit_req', 
+        'lift_pass', 
+        'type', 
     )
 
     ordering = ('date_time',)
@@ -44,8 +54,6 @@ class DisciplineAdmin(admin.ModelAdmin):
 
     ordering = ('name',)
     
-
-
 # Register your models here.
 admin.site.register(LessonType, LessonTypeAdmin)
 admin.site.register(Student, StudentAdmin)

@@ -42,14 +42,59 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <input class="form-control form-control-sm qty_input" type="number" name="quantity"
-                                        value="{{ item.lesson_quantity }}" min="1" max="{{ item.lesson.remaining_capacity }}" data-item_id="{{ item.lesson_id }}"
+                                        value="{{ item.lesson_quantity }}" min="1"
+                                        max="{{ item.lesson.remaining_capacity }}" data-item_id="{{ item.lesson_id }}"
                                         id="id_qty_{{ item.lesson_id }}">
                                 </div>
                             </div>
                             <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5" value="update">
                         </form>
+
                         {% endif %}
-                        <form class="form delete-form text-danger float-right" method="POST" action="{% url 'remove_from_bag' item.lesson_id %}"> {% csrf_token %}
+                        {% if user.is_authenticated %}
+                        <form class="form" method="POST">
+                            {% csrf_token %}
+                            {% for booked_student in item.booked_students %}
+                            <select class="student-update form-control rounded-0 w-200"
+                                name="selected_students "
+                                id='select_students'>
+                                <option value="{{booked_student.id}}" class="student-selection"
+                                    data-lesson_id="{{ item.lesson_id }}"> {{ booked_student.first_name}}
+                                    {{booked_student.second_name}}
+                                </option>
+                                {% for student in item.associated_students %}
+                                <option value="{{ student.id }}" class="student-selection" data-previous = "{{booked_student.id}}"
+                                    data-lesson_id="{{ item.lesson_id }}"> {{ student.first_name }}
+                                    {{student.second_name}}
+                                </option>
+                                {% endfor %}
+                                <option value="{{booked_student.id}}" class="student-selection"
+                                    data-lesson_id="{{ item.lesson_id }}"  data-remove="True"> de-select
+                                </option>
+                            </select>
+                            {% endfor %}
+
+                            {% for i in item.lesson_quantity_range %}
+                            <select class="student-update form-control rounded-0 w-200"
+                                name="selected_students "
+                                id='select_students'>
+                                <option value="" class="student-selection"> Select Student from dropdown:
+                                </option>
+                                {% for student in item.associated_students %}
+                                {% if student not in item.booked_students %}
+                                <option value="{{ student.id }}" class="student-selection"
+                                    data-lesson_id="{{ item.lesson_id }}"> {{ student.first_name }}
+                                    {{student.second_name}}
+                                </option>
+                                {% endif %}
+                                {% endfor %}
+                            </select>
+                            {% endfor %}
+
+                        </form>
+                        {% endif %}
+                        <form class="form delete-form text-danger float-right" method="POST"
+                            action="{% url 'remove_from_bag' item.lesson_id %}"> {% csrf_token %}
                             <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5" value="remove">
                         </form>
                     </td>
@@ -75,4 +120,36 @@
         </div>
     </div>
 </div>
+
+
+
+{% endblock %}
+
+
+{% block postloadjs %}
+{{ block.super }}
+<script type="text/javascript">
+    $('.student-selection').click(function (e) {
+        //alert("I'm here");
+        // var student = $(this);
+
+        //var bag_items = $(this).data('bag_item');
+        alert($(this).data('previous'));
+        //var selected_student = $('#select_student_position_1').val()
+        //alert($(this).val());
+
+
+        $.ajax({
+            type: 'POST',
+            url: 'update_student_pulldown/',
+            data: {
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                lesson_id: $(this).data('lesson_id'),
+                selected_student_id: $(this).val(),
+                remove: $(this).data('remove'),
+                previous: $(this).data('previous'),
+            }
+        })
+    })
+</script>
 {% endblock %}
