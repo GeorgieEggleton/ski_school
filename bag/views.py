@@ -76,9 +76,6 @@ def update_student_pulldown (request):
     previous = request.POST.get('previous')
     selected_student_id = request.POST.get('selected_student_id')
     student = get_object_or_404(Student, pk=selected_student_id)
-    print(f"selected_student:  {selected_student_id}")
-    print(f"lesson_id:{lesson_id}")
-    print(f"previous:{previous}")
 
 
     if remove == "True":

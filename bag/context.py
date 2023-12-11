@@ -26,15 +26,7 @@ def bag_contents(request):
             booked_students_ids = []
             for student in lesson_bag_details["students"]:
                 booked_students_ids.append(get_object_or_404(Student, pk=lesson_id).id)
-            booked_students = Student.objects.filter(pk__in= lesson_bag_details["students"]).values()
-
-
-
-            print(f" Associ_students:  { associated_students} ") 
-            print(f" booked_students:  { booked_students } ") 
-            print(f" associated_students:  { [i for i in associated_students if i not in booked_students ] } ")
-
-            
+            booked_students = Student.objects.filter(pk__in= lesson_bag_details["students"]).values()       
             bag_items.append({
                 'lesson_id': lesson_id,
                 'lesson_quantity': lesson_bag_details["quantity"],
@@ -44,7 +36,7 @@ def bag_contents(request):
                 'formatted_lesson_id' : f' {lesson.date_time.strftime("%y")}-{lesson_id}',
                 'subTotal' : subTotal,
                 'booked_students' : booked_students,
-                'associated_students' :  [i for i in associated_students if i not in booked_students ] ,
+                'associated_students' :  [i for i in associated_students if i not in booked_students ], #takes booked_students away from associated_students
             })
     
     context = {
@@ -52,5 +44,5 @@ def bag_contents(request):
         'bag_items' : bag_items,
         'total': total,
     }
-
+    print(f" Associ_students:  { bag} ")
     return context
