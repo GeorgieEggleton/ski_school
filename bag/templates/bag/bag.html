@@ -52,7 +52,7 @@
 
                         {% endif %}
                         {% if user.is_authenticated %}
-                        <form class="form" method="POST">
+                        <form class="form" method="POST" action="#">
                             {% csrf_token %}
                             {% for booked_student in item.booked_students %}
                             <select class="student-update form-control rounded-0 w-200"
@@ -90,7 +90,7 @@
                                 {% endfor %}
                             </select>
                             {% endfor %}
-
+                            <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5" value="Add student Details">
                         </form>
                         {% endif %}
                         <form class="form delete-form text-danger float-right" method="POST"
@@ -106,6 +106,12 @@
                 <td class="py-3">
                     <p class="my-0">Total to pay : ${{ total }}</p>
                 </td>
+                <a href="{% url 'checkout' %}" class="btn btn-black rounded-0 btn-lg">
+                    <span class="text-uppercase">Secure Checkout</span>
+                    <span class="icon">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                </a>
                 {% else %}
                 <p class="lead mb-5"> Your bag is empty. </p>
                 <a href="{% url 'home' %}" class="btn btn-outline-black rounded-0 btn-lg">
@@ -114,6 +120,8 @@
                     </span>
                     <span class="text-uppercase">Keep Shopping</span>
                 </a>
+                
+
                 {% endif %}
 
             </div>

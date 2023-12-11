@@ -13,7 +13,7 @@ def checkout(request):
         messages.error(request, "There's nothing in your bag")
         return redirect(reverse('products')) #Prevents people from manually accessing the URL by typing /checkout
 
-    current_bag = bag_contents(request)
+    #current_bag = bag_contents(request)
     
     order_form = OrderForm()
     template = 'checkout/checkout.html'

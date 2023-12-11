@@ -18,11 +18,11 @@ def all_lessons(request):
             
             try:
                 if types[2] == 'private':
-                    lessonTypes = lessonTypes.filter(Q(discipline__name__in=types) | Q(age_range__in=types) | Q(max_capacity=1))
+                    lessonTypes = lessonTypes.filter(Q(discipline__name__in=types) , Q(age_range__in=types) , Q(max_capacity=1))
                 elif types[2] == 'group':
-                    lessonTypes = lessonTypes.filter(Q(discipline__name__in=types) | Q(age_range__in=types) | Q(max_capacity__gt=1))
+                    lessonTypes = lessonTypes.filter(Q(discipline__name__in=types) , Q(age_range__in=types) , Q(max_capacity__gt=1))
                 elif types[2] == '':
-                    lessonTypes = lessonTypes = lessonTypes.filter(Q(discipline__name__in=types) | Q(age_range__in=types))
+                    lessonTypes = lessonTypes = lessonTypes.filter(Q(discipline__name__in=types) , Q(age_range__in=types))
                 else:
                     lessonTypes = None
             except:
