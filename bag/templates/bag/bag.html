@@ -16,27 +16,21 @@
 {% block content %}
 <div class="container mb-2">
     <div class="row">
-        <div class="col">
+        <div class="col-12 text-center logo-font text-grey">
             <hr>
-            <h2 class="logo-font mb-4">Shopping Bag</h2>
+            <h2 class="logo-font mb-4">Summary</h2>
             <hr>
         </div>
     </div>
     <div class="row">
-        <div class="col">
+        <div class="col-12">
             {% if bag_items %}
-            <div class="table-responsive rounded">
-                {% for item in bag_items %}
-                <tr>
-                    <td class="p-2 w-10">
-                        <img class="img-fluid rounded" src="{{ item.lesson.type.image.url }}">
-                    </td>
-                    <td class="py-3">
-                        <p class="my-0"><strong>{{ item.lesson.type }}</strong></p>
-                        <p class="my-0 small text-muted">lesson time/date: {{ item.formatted_lessontime }}</p>
-                        <p class="my-0 small text-muted">lesson id number: {{ item.formatted_lesson_id }}</p>
-                    </td>
-                    <td class="py-3 w-25">
+
+            {% for item in bag_items %}
+            <div class="container grey">
+                <div class="row mt-4">
+
+                    <div class="col-2">
                         {% if item.lesson.remaining_capacity > 1 %}
                         <form class="form" method="POST" action="{% url 'update_bag' item.lesson_id %}">
                             {% csrf_token %}
@@ -48,13 +42,29 @@
                                         id="id_qty_{{ item.lesson_id }}">
                                 </div>
                             </div>
-                            <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5" value="update">
+                            <input type="submit" class="text-uppercase btn btn-outline-black mb-5" value="update">
                         </form>
-
+                        {% else %}
+                        <div class="col-2">1</div>
                         {% endif %}
+                    </div>
+
+
+                    <div class="text-grey logo-font col-1"> X </div>
+                    <div class="col-9">
+                        <p class="my-0"><strong>{{ item.lesson.type }}</strong></p>
+                        <p class="my-0">lesson time/date: {{ item.formatted_lessontime }}</p>
+                        <p class="my-0 small text-muted">lesson id number: {{ item.formatted_lesson_id }}</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+
                         {% if user.is_authenticated %}
                         {% for booked_student in item.booked_students %}
-                        <select class="student-update form-control rounded-0 col-sm-6" name="selected_students "
+
+                        <select class="student-update form-control col-sm-6" name="selected_students "
                             id='select_students'>
                             <option value="{{booked_student.id}}" class="student-selection"
                                 data-lesson_id="{{ item.lesson_id }}" data-remove="True"> de-select
@@ -72,7 +82,10 @@
                                 {{booked_student.second_name}}
                             </option>
                         </select>
-                        <div id="add_student" class="btn-black col-sm-2 add_student"> Add Student </div>
+
+                        <div id="add_student" class="add_student">
+                            <p class="add_student">+ Add Student</p>
+                        </div>
                         <div id="student_entry_panel" class="slider">
                             <form class="form" method="POST" action="{% url 'add_student' %}">
                                 {% csrf_token %}
@@ -95,23 +108,26 @@
                             </form>
                         </div>
                         {% endfor %}
-                        
+
                         {% for i in item.lesson_quantity_range %}
-                        <select class="student-update form-control rounded-0 col-sm-6" name="selected_students_{{ i }}"
-                            id='select_students'>
+                        
+                        <select class="student-update form-control rounded-0 col-sm-6 offset-1 mb-1"
+                            name="selected_students_{{ i }}" id='select_students'>
                             <option value="" class="student-selection coll-sm-6" selected> Select Student from dropdown:
                             </option>
+                           
                             {% for student in item.associated_students %}
-                            {% if student not in item.booked_students %}
+                        
                             <option value="{{ student.id }}" class="student-selection"
                                 data-lesson_id="{{ item.lesson_id }}"> {{ student.first_name }}
                                 {{student.second_name}}
                             </option>
-                            {% endif %}
+                            
                             {% endfor %}
                         </select>
-                        <div id="add_student" class="btn-black col-sm-2 add_student"> Add Student </div>
-                        <div id="student_entry_panel" class="slider">
+                        <div id="add_student" class="col-sm-6 offset-1 mb-2 add_student"><i
+                                class="fa-solid fa-circle-plus text-green pointer"></i> Add Student Details </div>
+                        <div id="student_entry_panel" class="slider col-sm-6 offset-1">
                             <form class="form" method="POST" action="{% url 'add_student' %}">
                                 {% csrf_token %}
                                 <div class="row">
@@ -122,50 +138,59 @@
                                     <input name="age" class="col-sm-3 offset-1" type="date" value="1">
                                     </input>
                                 </div>
-                                <div class="btn btn-outline-black rounded-0 btn-lg">
-                                    <span class="icon">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </span>
-                                    <span class="text-uppercase">Remove Student</span>
+                                <div class="btn">
+                                    <input type="submit" class="btn btn-outline-black" value="Save">
                                 </div>
-                                <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5"
-                                    value="Add Student Details">
                             </form>
                         </div>
+
+
                         {% endfor %}
                         {% endif %}
-
-                        <form class="form delete-form text-danger float-right" method="POST"
-                            action="{% url 'remove_from_bag' item.lesson_id %}"> {% csrf_token %}
-                            <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5" value="remove">
-                        </form>
-                    </td>
-                    <td class="py-3">
-                        <p class="my-0">${{ item.subTotal }}</p>
-                    </td>
-                </tr>
-                {% endfor %}
-                <td class="py-3">
-                    <p class="my-0">Total to pay : ${{ total }}</p>
-                </td>
-                <a href="{% url 'checkout' %}" class="btn btn-black rounded-0 btn-lg">
-                    <span class="text-uppercase">Secure Checkout</span>
-                    <span class="icon">
-                        <i class="fas fa-lock"></i>
-                    </span>
-                </a>
-                {% else %}
-                <p class="lead mb-5"> Your bag is empty. </p>
-                <a href="{% url 'home' %}" class="btn btn-outline-black rounded-0 btn-lg">
-                    <span class="icon">
-                        <i class="fas fa-chevron-left"></i>
-                    </span>
-                    <span class="text-uppercase">Keep Shopping</span>
-                </a>
-                {% endif %}
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12 offset-1">
+                        <p>{{ item.lesson_quantity }} Lessons @ £{{ item.lesson_type_price }} 
+                            each = £{{ item.subTotal}} </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12">
+                    <form class="form delete-form text-danger float-right" method="POST"
+                        action="{% url 'remove_from_bag' item.lesson_id %}"> {% csrf_token %}
+                        <input type="submit" class="text-uppercase mt-5 mb-2" value="remove">
+                    </form>
+                    <a class="remove-item text-danger float-right" id="remove_{{ item.item_id}}"
+                        data-product_size="{{ item.sze }}"><small>Remove</small></a>
+                </div>
             </div>
         </div>
     </div>
+
+    {% endfor %}
+    <td class="py-3">
+        <p class="my-0">Total to pay : ${{ total }}</p>
+    </td>
+    <a href="{% url 'checkout' %}" class="btn btn-black rounded-0 btn-lg">
+        <span class="text-uppercase">Secure Checkout</span>
+        <span class="icon">
+            <i class="fas fa-lock"></i>
+        </span>
+    </a>
+    {% else %}
+    <p class="lead mb-5"> Your bag is empty. </p>
+    <a href="{% url 'home' %}" class="btn btn-outline-black rounded-0 btn-lg">
+        <span class="icon">
+            <i class="fas fa-chevron-left"></i>
+        </span>
+        <span class="text-uppercase">Keep Shopping</span>
+    </a>
+    {% endif %}
+</div>
+</div>
+</div>
 </div>
 
 {% endblock %}

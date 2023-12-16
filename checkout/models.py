@@ -1,9 +1,10 @@
 import uuid
-
+from django.db.models.signals import post_save
 from django.db import models
 from django.db.models import Sum
 from django.conf import settings
 from django_countries.fields import CountryField
+
 
 from lessons.models import Lesson, Student
 
@@ -51,11 +52,12 @@ class OrderLineItem(models.Model):
     order = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems')
     lesson = models.ForeignKey(Lesson, models.SET_NULL, null=True, blank=True)
     students =  models.ManyToManyField(Student, blank=True)
-    lineitem_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, editable=False)
+    lineitem_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, editable=False, default=0)
 
-    def save(self, *args, **kwargs):
-
-        self.lineitem_total = self.lesson.type.price * self.quantity
+    def post_save(self, *args, **kwargs):
+        print(f"students { self.students }")
+        self.lineitem_total = self.lesson.type.price
+        #self.lineitem_total = self.lesson.type.price * self.students.count()
         super().save(*args, **kwargs)
 
     def __str__(self):

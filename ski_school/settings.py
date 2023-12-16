@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-$@j^du@lbdi3kd(@sqab$+wmlw76_*)3!-2qvj@l6v)+47h8g=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-georgieegglet-skischool-0324olqwrk5.ws-eu106.gitpod.io']
+ALLOWED_HOSTS = ['8000-georgieegglet-skischool-0324olqwrk5.ws-eu107.gitpod.io']
 
 
 # Application definition
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'bag',
     'checkout',
     'crispy_forms',
+    'payment',
 ]
 
 MIDDLEWARE = [
@@ -77,7 +78,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # allauth settings
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = '/accounts/login/'

@@ -3,7 +3,6 @@ from django.contrib.auth.models import User #imports the User from the Allauth p
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-
 class Discipline(models.Model):
     name = models.CharField(null=False, blank=False, default = 'Ski', max_length=128)
     equipment_type = models.CharField(null=True, blank=True, max_length=128)
@@ -30,7 +29,7 @@ class LessonType(models.Model):
             type = 'Group'
         else:
             type = 'Private'
-        return f"{self.max_capacity} Capacity {self.age_range} {self.discipline} lesson"
+        return f" {type} {self.age_range} {self.discipline} lesson"
 
 class LiftPass(models.Model):
 
@@ -61,20 +60,15 @@ class Lesson(models.Model):
     type = models.ForeignKey(LessonType, on_delete=models.CASCADE, related_name="lesson") 
 
 
-
+    """
     def save(self, *args, **kwargs):
         
-        """Overwrites save method to calculate available places"""
+
         super().save(*args, **kwargs)
         self.remaining_capacity = self.type.max_capacity - self.students.count()
        
         super().save(*args, **kwargs)
-    
-    
-
-
-
-
+    """
     def __str__(self):
         if self.type.max_capacity > 1:
             type = 'Group'
@@ -83,7 +77,4 @@ class Lesson(models.Model):
 
         return f"{self.type.age_range} {type} {self.type.discipline} lesson at {self.date_time.strftime("%H%M on %a %d %B %Y")}"
 
-@receiver(post_save, sender=Lesson)
-def update_stock(sender, instance, **kwargs):
-    print(f"cpacity update { sender.objects.remaining_capacity }")
 

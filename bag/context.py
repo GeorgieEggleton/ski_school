@@ -10,6 +10,9 @@ def bag_contents(request):
     associated_students_id = []
     total = 0 #setting the bag total price to 0
     bag = request.session.get('bag',{}) #retreaving "bag" from the session
+    booked_students = []
+    remaining_students = []
+
 
     if request.user.is_authenticated:
         associated_students =  Student.objects.filter(userAccount = request.user).values()
@@ -25,21 +28,22 @@ def bag_contents(request):
                     lesson_bag_details["quantity"] = lesson.remaining_capacity
             subTotal = lesson_bag_details["quantity"] * lesson.type.price 
             total += subTotal
-            booked_students_ids = []
 
-            for student in lesson_bag_details["students"]:
-                booked_students_ids.append(get_object_or_404(Student, pk=lesson_id).id)
-            booked_students = Student.objects.filter(pk__in= lesson_bag_details["students"]).values()       
+            if request.user.is_authenticated:
+                booked_students = Student.objects.filter(pk__in= lesson_bag_details["students"]).values()       
+                remaining_students = [i for i in associated_students if i not in booked_students ] #takes booked_students away from associated_students
+            #print(f" remaining_students  { remaining_students }")
             bag_items.append({
                 'lesson_id': lesson_id,
                 'lesson_quantity': lesson_bag_details["quantity"],
                 'lesson_quantity_range' : [*range(lesson_bag_details["quantity"] - len(booked_students))], #really longwinded way of  getting an unpacked list to allow .html to printa dropdown fo the number of students on the list.  JInija "range"does nto seem to be supported on Django
                 'lesson' : lesson,
+                'lesson_type_price' : lesson.type.price,
                 'formatted_lessontime' : lesson.date_time.strftime("%H%M on %a %d %m %Y"),
                 'formatted_lesson_id' : f' {lesson.date_time.strftime("%y")}-{lesson_id}',
                 'subTotal' : subTotal,
                 'booked_students' : booked_students,
-                'associated_students' :  [i for i in associated_students if i not in booked_students ], #takes booked_students away from associated_students
+                'associated_students' :  remaining_students
             })
     
     context = {

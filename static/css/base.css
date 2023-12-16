@@ -2,6 +2,11 @@ html {
     height: 100%;
 }
 
+.grey{
+    border: 1px solid #555;
+    margin-bottom: 10px;
+}
+
 body {
     margin-top: 140px !important;
     /*height: calc(100vh - 164px)!important;*/
@@ -60,7 +65,8 @@ hr{
 
 .home-text{
     font-size: 1vw; 
-    line-height: 1.5;    
+    line-height: 1.5; 
+   
 }
 
 .home-image{
@@ -81,6 +87,14 @@ hr{
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.5);
     width: 80%;
 } 
+
+.home-para{
+    margin: 20px;
+    font-size: .8vw; 
+    line-height: 1.5; 
+    padding-left: 20px;
+    padding-right: 20px;
+}
 
 .text-col {
     margin: 20px;
@@ -135,9 +149,23 @@ footer {
     color: white;
     cursor: pointer;
 }
+
+.btn-outline-white {
+    background: #003145;
+    color: white !important; /* use important to override link colors for <a> elements */
+    border: 1px solid white;
+    width: 200px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
 .btn-book {
     background: #003145;
     color: white;
+}
+
+.add_student{
+    color: #28a745;
 }
 
 .btn-outline-black {
@@ -173,6 +201,13 @@ footer {
 
 .text-white{
     color: #fff; !important;
+}
+
+.text-green{
+   color: #28a745 !important;
+}
+.pointer:hover{
+    cursor: pointer;
 }
 
 .border-black {
@@ -214,6 +249,10 @@ a.category-badge > span.badge:hover {
 
 input[name='q']::placeholder {
     color: #aab7c4;
+}
+
+.summary-table{
+    width:50%;
 }
 
 /* ------------------------------- bootstrap toasts */

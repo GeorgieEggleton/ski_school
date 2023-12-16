@@ -14,7 +14,7 @@
 {% block content %}
 <div class="image-container">
     <picture>
-        <source  media="(max-width: 991px)" srcset="/media/ski.jpeg">
+        <source media="(max-width: 991px)" srcset="/media/ski.jpeg">
         <img class="img-fluid" src="/media/home-hero.jpeg" alt="image">
     </picture>
     <div class="overlay-text col-lg-4 col-sm-10 offset-lg-6 offset-sm-1 h-100">
@@ -32,25 +32,30 @@
 <section>
 
 
-      <div class="card">
+    <div class="card">
         <div class="row mt-4">
             <div class="col-12 col-lg-6 my-auto">
                 <a href="{% url 'all_lessons' %}?type=Ski,,">
-                    <img class="home-image  mx-auto d-block" src="/media/private-ski-lesson-500x520-crop-500x520-crop.jpeg" alt="image">
+                    <img class="home-image  mx-auto d-block"
+                        src="/media/private-ski-lesson-500x520-crop-500x520-crop.jpeg" alt="image">
                 </a>
                 <h3 class="text-center pt-3 logo-font">Ski Lessons</h3>
-                <p class="text-center pb-4 text-col">The best Lorem Ipsum Generator in all the sea! Heave this scurvy copyfiller
-                    fer yar next adventure and cajol yar clients into walking the plank with ev'ry layout! Configure
-                    above, then get yer pirate ipsum...own the high seas, arg!</p>
+                <p class="text-center pb-4 text-col home-para">Our small and hand picked team of professional ski instructors are
+                    able to offer both private 1-2-1 lessons or group lessons for all ages and abilities. Our
+                    instructors are known for their adaptability; we appreciate everyone enjoys different things and we
+                    want you to have your own extraordinary experience on the snow.</p>
             </div>
             <div class="col-12 col-lg-6 my-auto">
                 <a href="{% url 'all_lessons' %}?type=Snowboard,,">
-                    <img class="home-image mx-auto d-block" src="/media/snowboard-lessons-500x520-crop.jpeg" alt="image">
+                    <img class="home-image mx-auto d-block" src="/media/snowboard-lessons-500x520-crop.jpeg"
+                        alt="image">
                 </a>
                 <h3 class="text-center pt-3 logo-font">Snowboard Lessons</h3>
-                <p class="text-center pb-4 text-col">The best Lorem Ipsum Generator in all the sea! Heave this scurvy copyfiller
-                    fer yar next adventure and cajol yar clients into walking the plank with ev'ry layout! Configure
-                    above, then get yer pirate ipsum...own the high seas, arg!</p>
+                <p class="text-center pb-4 text-col home-para">Private and Group snowboard lessons are offered throughout the season
+                    at alp Snow schools. Improve your board skills on the snow for both adults and children; improve at
+                    your own pace with a dedicated and carefully chosen ES instructor who will tailor your time together
+                    so that you learn in a way that exactly suits you.
+                </p>
             </div>
         </div>
 
