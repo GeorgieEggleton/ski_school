@@ -47,9 +47,10 @@ INSTALLED_APPS = [
     'home',
     'lessons',
     'bag',
-    'checkout',
     'crispy_forms',
     'payment',
+    'profiles',
+
 ]
 
 MIDDLEWARE = [

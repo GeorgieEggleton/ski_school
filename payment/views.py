@@ -63,6 +63,9 @@ def payment_successful(request):
 	user_payment = UserPayment.objects.get(app_user=user_id)
 	user_payment.stripe_checkout_id = checkout_session_id
 	user_payment.save()
+
+
+	request.session['bag'] = [] 
 	return render(request, 'user_payment/payment_successful.html', {'customer': customer})
 
 def payment_cancelled(request):
