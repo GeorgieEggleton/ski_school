@@ -42,7 +42,7 @@ def product_page(request):
 				payment_method_types = ['card'],
 				line_items = line_items_stripe,
 				mode = 'payment',
-				customer_creation = 'always',
+				customer_creation = 'if_required',
 				success_url = "https://" + settings.ALLOWED_HOSTS[0] + '/payment/payment_successful?session_id={CHECKOUT_SESSION_ID}',
 				cancel_url = "https://" + settings.ALLOWED_HOSTS[0] + '/payment/payment_cancelled', 
 				)

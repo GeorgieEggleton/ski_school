@@ -13,18 +13,20 @@ def all_lessons(request):
         if 'type' in request.GET:
             types = request.GET['type'].split(',')
             print(types)
-            lessonTypes = lessonTypes.filter()
+            lessonTypes = lessonTypes.filter() #find all instances of the lessonType pre-filter
             """[disapline,age,capacity] Ski,,"""
             
             try:
+                if types[0] != '': # making Django use '' as a whild card rather than  blocking everything
+                    lessonTypes = lessonTypes.filter(Q(discipline__name__in=types))                  
+                if types[1] != '':
+                    lessonTypes = lessonTypes.filter(Q(age_range__in=types))
                 if types[2] == 'private':
-                    lessonTypes = lessonTypes.filter(Q(discipline__name__in=types) , Q(age_range__in=types) , Q(max_capacity=1))
+                    lessonTypes = lessonTypes.filter(Q(max_capacity=1))
                 elif types[2] == 'group':
-                    lessonTypes = lessonTypes.filter(Q(discipline__name__in=types) , Q(age_range__in=types) , Q(max_capacity__gt=1))
-                elif types[2] == '':
-                    lessonTypes = lessonTypes = lessonTypes.filter(Q(discipline__name__in=types) , Q(age_range__in=types))
-                else:
-                    lessonTypes = None
+                    lessonTypes = lessonTypes.filter(Q(max_capacity__gt=1))
+                
+
             except:
                 messages.error(request, "invalid search")
             print(lessonTypes)

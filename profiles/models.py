@@ -3,9 +3,8 @@ from django.dispatch import receiver
 from django.contrib.auth.models import User
 from django_countries.fields import CountryField
 
-class Profile():
+class Profile(models.Model):
     full_name = models.CharField(max_length=50, null=False, blank=False)
-    email = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
     country = CountryField(blank_label='Country *', null=False, blank=False)
     postcode = models.CharField(max_length=20, null=True, blank=True)
@@ -17,5 +16,10 @@ class Profile():
     user = models.ForeignKey(User, models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.full_name} {email}"
+        return f"{self.full_name}"
+
+    def create(self, *args, **kwargs):
+        self.user = request.user
+        
+        
 

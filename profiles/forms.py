@@ -4,8 +4,8 @@ from .models import Profile
 
 class Profile_Form(forms.ModelForm):
     class Meta:
-      
-        fields = ('full_name', 'email', 'phone_number',
+        model = Profile
+        fields = ('full_name', 'phone_number',
                   'street_address1', 'street_address2',
                   'town_or_city', 'postcode', 'country',
                   'county',)
@@ -18,7 +18,6 @@ class Profile_Form(forms.ModelForm):
         super().__init__(*args, **kwargs)
         placeholders = {
             'full_name': 'Full Name',
-            'email': 'Email Address',
             'phone_number': 'Phone Number',
             'postcode': 'Postal Code',
             'town_or_city': 'Town or City',

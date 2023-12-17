@@ -103,8 +103,6 @@ def add_student(request):
                     messages.error(request, f'Student already exists') 
                     studentExists = True 
 
-        print(f"( {linkedStudents} )") 
-
         if not studentExists: 
             newstudent = Student.objects.create( 
                 first_name = str(request.POST.get('first_name')), 
