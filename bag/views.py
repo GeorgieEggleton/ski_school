@@ -15,7 +15,7 @@ def add_to_bag(request, item_id):
     redirect_url = request.POST.get('redirect_url') 
     bag = request.session.get('bag', {}) 
     lesson_whole = get_object_or_404(Lesson, pk=lesson) 
-
+    print(bag)
     if lesson in list(bag.keys()): 
         if bag[lesson]["quantity"] + quantity <= lesson_whole.remaining_capacity: 
             bag[lesson]["quantity"] += quantity 
@@ -34,6 +34,7 @@ def add_to_bag(request, item_id):
         messages.success(request, f'Added {lesson} to your bag') 
 
     request.session['bag'] = bag 
+    print(bag)
     return redirect(redirect_url) 
 
 def update_bag(request, lesson_id): 

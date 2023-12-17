@@ -14,13 +14,77 @@
 {% endblock%}
 
 {% block body %}
+<div class="container">
+  <div class="row">
+      <div class="col">
+          <hr>
+          <h2 class="logo-font mb-4">Checkout</h2>
+          <hr>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-12 col-lg-6 order-lg-last mb-5">
+          <p class="text-muted">Order Summary</p>
+          <div class="row">
+              <div class="col-7 offset-2">
+                  <p class="mb-1 mt-0 small text-muted">Item</p>
+              </div>
+              <div class="col-3 text-right">
+                  <p class="mb-1 mt-0 small text-muted">Subtotal</p>
+              </div>
+          </div>
+          {% for item in bag_items %}
+              <div class="row">
+                  <div class="col-2 mb-1">
+                      <a href="#">
+                          
+                      </a>
+                  </div>
+                  <div class="col-7">
+                      <p class="my-0"><strong>{{ item.lesson }}</strong></p>
+                      <p class="my-0 small text-muted">Qty: {{ item.lesson_quantity }}</p>
+                  </div>
+                  <div class="col-3 text-right">
+                      <p class="my-0 small text-muted"> £{{item.subTotal}}</p>
+                  </div>
+              </div>
+          {% endfor %}
+          <hr class="my-0">
+          <div class="row text-black text-right">
+              <div class="col-7 offset-2">
+                  <p class="my-0">Order Total:</p>
 
-<body>
+              </div>
+              <div class="col-3">
+                  <p class="my-0">£{{ total | floatformat:2 }}</p>
 
-  <div class="container home_msg">
-    <h1>Thanks for your order {{ customer.name }}!</h1>
+              </div>
+          </div>
+      </div>
   </div>
 
-</body>
+
+  <div id="checkout">
+
+
+      <!-- Checkout will insert the payment form here -->
+    </div>
+
+
+
+
+  <div class="container home_msg">
+      {% if user.is_authenticated %}
+        <form enctype="multipart/form-data" action="{% url 'product_page' %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5"
+                                  value="Hi {{ user }}! To pay, click on this button ">
+
+        </form>
+      {% else %}
+        <h2>You're not logged in...</h2><a href="{% url 'login' %}" class="btn btn-secondary">Log in</a>
+  
+      {% endif %}
+    </div>
 
 {% endblock %} 

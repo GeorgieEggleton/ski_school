@@ -13,7 +13,6 @@ def bag_contents(request):
     booked_students = []
     remaining_students = []
 
-
     if request.user.is_authenticated:
         associated_students =  Student.objects.filter(userAccount = request.user).values()
         for associated_student in associated_students:
@@ -32,7 +31,7 @@ def bag_contents(request):
             if request.user.is_authenticated:
                 booked_students = Student.objects.filter(pk__in= lesson_bag_details["students"]).values()       
                 remaining_students = [i for i in associated_students if i not in booked_students ] #takes booked_students away from associated_students
-            #print(f" remaining_students  { remaining_students }")
+          
             bag_items.append({
                 'lesson_id': lesson_id,
                 'lesson_quantity': lesson_bag_details["quantity"],
@@ -45,11 +44,9 @@ def bag_contents(request):
                 'booked_students' : booked_students,
                 'associated_students' :  remaining_students
             })
-    
     context = {
         
         'bag_items' : bag_items,
         'total': total,
     }
-  
     return context

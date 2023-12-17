@@ -1,31 +1,24 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
-from payment.models import UserPayment
+from payment.models import Order, OrderLineItem
+from profiles.models import Profile
+from lessons.models import Student, Lesson
 from .bagCalc import bag_contents
 import stripe
 import time
 from django.contrib.auth.models import User
-import uuid
+from django.contrib import messages
 
-def display_product_page(request):
-	return render(request, 'payment/product_page.html')
 
-#@login_required(login_url='login')
+
 def product_page(request):
 	line_items_stripe = []
 	if request.user.is_authenticated:
 		formatted_bag = bag_contents(request)
-		print(f"formatted bag:      {settings.ALLOWED_HOSTS}")
 		stripe.api_key = settings.STRIPE_SECRET_KEY
-		"""payment_intent_stripe = stripe.PaymentIntent.create(
-								amount=int(formatted_bag['total']),
-								currency="gbp",
-								automatic_payment_methods={"enabled": True},
-								),
-		"""
 		for item in formatted_bag['bag_items']:
 			line_items_stripe.append({
 					'price' : stripe.Price.create(
@@ -36,45 +29,63 @@ def product_page(request):
 					'quantity' : item['quantity'],
 					})
 		
-		if request.method == 'POST':
-			
-			checkout_session = stripe.checkout.Session.create( #creates the stripe session object which is the root level class https://stripe.com/docs/api/checkout/sessions/object
-				payment_method_types = ['card'],
-				line_items = line_items_stripe,
-				mode = 'payment',
-				customer_creation = 'if_required',
-				success_url = "https://" + settings.ALLOWED_HOSTS[0] + '/payment/payment_successful?session_id={CHECKOUT_SESSION_ID}',
-				cancel_url = "https://" + settings.ALLOWED_HOSTS[0] + '/payment/payment_cancelled', 
-				)
-			return redirect(checkout_session.url, code=303)
-		return render(request, 'payment/product_page.html')
-
-## use Stripe dummy card: 4242 4242 4242 4242
+		profile = Profile.objects.get(user=request.user)
+		checkout_session = stripe.checkout.Session.create( #creates the stripe session object which is the root level class https://stripe.com/docs/api/checkout/sessions/object
+			payment_method_types = ['card', 'paypal'],
+			line_items = line_items_stripe,
+			mode = 'payment',
+			customer_creation = 'if_required',
+			customer_email = request.user.email,
+			success_url = "https://" + settings.ALLOWED_HOSTS[0] + '/payment/payment_successful?session_id={CHECKOUT_SESSION_ID}',
+			cancel_url = "https://" + settings.ALLOWED_HOSTS[0] + '/payment/payment_cancelled', 
+			)
+		return redirect(checkout_session.url, code=303)
+		
 def payment_successful(request):
 	
-	stripe.api_key = settings.STRIPE_SECRET_KEY_TEST
+	customer = ''
+	stripe.api_key = settings.STRIPE_SECRET_KEY
 	checkout_session_id = request.GET.get('session_id', None)
 	session = stripe.checkout.Session.retrieve(checkout_session_id)
-	customer = stripe.Customer.retrieve(session.customer)
-	user_id = request.user.user_id
-
+	print(f"Stripe Session {session}")
+	try:  
+		order = Order.objects.get(user=request.user)
+	except Order.DoesNotExist: 
+		order = Order.objects.create(user=request.user)
+	order.stripe_pid = checkout_session_id 
+	order.fullname = session["customer_details"]["name"]
+	order.country = session["customer_details"]["address"]["country"] or ''
+	order.postcode = session["customer_details"]["address"]["postal_code"] or ''
+	order.email = session["customer_details"]["email"]
+	order.order_total = session["amount_total"]
+	order.save()
 	
-	UserPayment.objects.create(app_user=request.user)
-	user_payment = UserPayment.objects.get(app_user=user_id)
-	user_payment.stripe_checkout_id = checkout_session_id
-	user_payment.save()
-
-
-	request.session['bag'] = [] 
-	return render(request, 'user_payment/payment_successful.html', {'customer': customer})
+	formatted_bag = bag_contents(request)
+	for item in formatted_bag['bag_items']:
+		orderlineitem = OrderLineItem.objects.create(
+			order = order,
+			lesson = (item['lesson']),
+			lineitem_total = (item['subTotal']),
+		)
+		for booked_student in item['booked_students']:				
+			booked_student = Student.objects.get(id=booked_student['id'])
+			lesson = Lesson.objects.get(id = item['lesson'].id)
+			booked_student.orderlineitem_set.add(orderlineitem)
+			if lesson.remaining_capacity > 0: lesson.remaining_capacity -= 1 
+			lesson.save()
+	
+	request.session['bag'] = {}
+	messages.success(request, f'Payment Successful') 
+	return redirect('home')
 
 def payment_cancelled(request):
-	stripe.api_key = settings.STRIPE_SECRET_KEY_TEST
-	return render(request, 'user_payment/payment_cancelled.html')
+	stripe.api_key = settings.STRIPE_SECRET_KEY
+	messages.error(request, f'Payment failed - please retry or contact customer support')
+	return redirect('bag')
 
 @csrf_exempt
 def stripe_webhook(request):
-	stripe.api_key = settings.STRIPE_SECRET_KEY_TEST
+	stripe.api_key = settings.STRIPE_SECRET_KEY
 	time.sleep(10)
 	payload = request.body
 	signature_header = request.META['HTTP_STRIPE_SIGNATURE']
