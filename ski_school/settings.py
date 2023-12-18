@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-$@j^du@lbdi3kd(@sqab$+wmlw76_*)3!-2qvj@l6v)+47h8g=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['alps-snow-school.heroku.com', 'localhost']
+ALLOWED_HOSTS = ['alps-snow-school.heroku.com', 'localhost', 'alps-snow-school-4dd405a355b2.herokuapp.com']
 
 
 # Application definition
