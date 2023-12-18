@@ -14,7 +14,7 @@
 {% block content %}
 <div class="image-container">
     <picture>
-        <source media="(max-width: 991px)" srcset="/media/ski.jpeg">
+        <source media="(max-width: 991px)" srcset="{{ MEDIA_URL }}ski.jpeg">
         <img class="img-fluid" src="{{ MEDIA_URL }}home-hero.jpeg" alt="image">
     </picture>
     <div class="overlay-text col-lg-4 col-sm-10 offset-lg-6 offset-sm-1 h-100">
@@ -37,7 +37,7 @@
             <div class="col-12 col-lg-6 my-auto">
                 <a href="{% url 'all_lessons' %}?type=Ski,,">
                     <img class="home-image  mx-auto d-block"
-                        src="/media/private-ski-lesson-500x520-crop-500x520-crop.jpeg" alt="image">
+                        src="{{ MEDIA_URL }}private-ski-lesson-500x520-crop-500x520-crop.jpeg" alt="image">
                 </a>
                 <h3 class="text-center pt-3 logo-font">Ski Lessons</h3>
                 <p class="text-center pb-4 text-col home-para">Our small and hand picked team of professional ski instructors are
@@ -47,7 +47,7 @@
             </div>
             <div class="col-12 col-lg-6 my-auto">
                 <a href="{% url 'all_lessons' %}?type=Snowboard,,">
-                    <img class="home-image mx-auto d-block" src="/media/snowboard-lessons-500x520-crop.jpeg"
+                    <img class="home-image mx-auto d-block" src="{{ MEDIA_URL }}snowboard-lessons-500x520-crop.jpeg"
                         alt="image">
                 </a>
                 <h3 class="text-center pt-3 logo-font">Snowboard Lessons</h3>
