@@ -11,6 +11,8 @@ import stripe
 import time
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 
 
 
@@ -42,41 +44,58 @@ def product_page(request):
 		return redirect(checkout_session.url, code=303)
 		
 def payment_successful(request):
-	
-	customer = ''
-	stripe.api_key = settings.STRIPE_SECRET_KEY
-	checkout_session_id = request.GET.get('session_id', None)
-	session = stripe.checkout.Session.retrieve(checkout_session_id)
-	print(f"Stripe Session {session}")
-	try:  
-		order = Order.objects.get(user=request.user)
-	except Order.DoesNotExist: 
-		order = Order.objects.create(user=request.user)
-	order.stripe_pid = checkout_session_id 
-	order.fullname = session["customer_details"]["name"]
-	order.country = session["customer_details"]["address"]["country"] or ''
-	order.postcode = session["customer_details"]["address"]["postal_code"] or ''
-	order.email = session["customer_details"]["email"]
-	order.order_total = session["amount_total"]
-	order.save()
-	
-	formatted_bag = bag_contents(request)
-	for item in formatted_bag['bag_items']:
-		orderlineitem = OrderLineItem.objects.create(
-			order = order,
-			lesson = (item['lesson']),
-			lineitem_total = (item['subTotal']),
-		)
-		for booked_student in item['booked_students']:				
-			booked_student = Student.objects.get(id=booked_student['id'])
-			lesson = Lesson.objects.get(id = item['lesson'].id)
-			booked_student.orderlineitem_set.add(orderlineitem)
-			if lesson.remaining_capacity > 0: lesson.remaining_capacity -= 1 
-			lesson.save()
-	
-	request.session['bag'] = {}
-	messages.success(request, f'Payment Successful') 
-	return redirect('home')
+	if request.user.is_authenticated:
+		
+		customer = ''
+		stripe.api_key = settings.STRIPE_SECRET_KEY
+		checkout_session_id = request.GET.get('session_id', None)
+		session = stripe.checkout.Session.retrieve(checkout_session_id)
+		print(f"Stripe Session {session}")
+		try:  
+			order = Order.objects.get(user=request.user)
+		except Order.DoesNotExist: 
+			order = Order.objects.create(user=request.user)
+		order.stripe_pid = checkout_session_id 
+		if session["customer_details"]["name"] == '':
+			order.fullname = profile.fullname
+		else:
+			order.fullname = session["customer_details"]["name"]
+		order.country = session["customer_details"]["address"]["country"] or ''
+		order.postcode = session["customer_details"]["address"]["postal_code"] or ''
+		order.email = session["customer_details"]["email"]
+		order.order_total = session["amount_total"]
+		order.save()
+		
+		formatted_bag = bag_contents(request)
+		for item in formatted_bag['bag_items']:
+			orderlineitem = OrderLineItem.objects.create(
+				order = order,
+				lesson = (item['lesson']),
+				lineitem_total = (item['subTotal']),
+			)
+			for booked_student in item['booked_students']:				
+				booked_student = Student.objects.get(id=booked_student['id'])
+				lesson = Lesson.objects.get(id = item['lesson'].id)
+				booked_student.orderlineitem_set.add(orderlineitem)
+				if lesson.remaining_capacity > 0: lesson.remaining_capacity -= 1 
+				lesson.save()
+		
+		send_mail(
+			subject = render_to_string('payment/confirmation_emails/confirmation_email_subject.txt',
+				{'order_number' : order.id}),
+			message = render_to_string(
+				'payment/confirmation_emails/confirmation_email_text.txt',
+				{'bag_contents': formatted_bag,
+				'order_number': order.id,
+				'stripe_PID' : checkout_session_id,
+				}),
+			from_email=settings.EMAIL_HOST_USER,
+			recipient_list=[request.user.email],
+			)
+
+		request.session['bag'] = {}
+		messages.success(request, f'Payment Successful an email has been sent to {request.user.email}') 
+		return redirect('home')
 
 def payment_cancelled(request):
 	stripe.api_key = settings.STRIPE_SECRET_KEY

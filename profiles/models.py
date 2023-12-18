@@ -20,8 +20,5 @@ class Profile(models.Model):
 
     def create(self, *args, **kwargs):
         self.user = request.user
-
-class Newsletter(models.Model):
-        email_address = models.EmailField(max_length=254, null=False, blank=False)
         
 

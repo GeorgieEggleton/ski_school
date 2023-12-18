@@ -1,22 +1,5 @@
-{% extends "base.html" %}
-{% load static %}
+Thankyou for booking the following lessons:
 
-
-
-{% block page_header %}
-<div class="container header-container">
-    <div class="row">
-        <div class="col"></div>
-    </div>
-</div>
-{% endblock %}
-
-{% block content %}
-
-
-
-<div class="col-sm-12 col-lg-12">
-    
         <table class = "border">
             <tr class= "border">
                 <th class = col-sm-1> Order Number</th>
@@ -24,10 +7,8 @@
                 <th class = col-sm-8> <table><th class = col-sm-10>Courses Booked</th><th class = col-sm-2>Students</th></table></th>
                 <th class = col-sm-1> Order total</th>
             </tr>
-            {% for order in full_orders %}
             <tr class= "border">
-                <td> {{ order.order.id }}</td>
-                <td> {{ order.order.dateTimeCreated }}</td>
+                <td> {{ order_number }}</td>
                 <td> 
                     <table class = "col-sm-12">
                         {% for line_item in order.lineitems %}
@@ -47,20 +28,7 @@
                     </table>
                 </td>
                 <td> £{{ order.order.order_total }} </td>
-            {% endfor %}
         </table>
        
         </div>
         <div>
- 
-        </div>
-        <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5" 
-        value="Update Profile">
-    </form>
-</div>
-
-{% endblock %}
-
-{% block postloadjs %}
-
-{% endblock %}
