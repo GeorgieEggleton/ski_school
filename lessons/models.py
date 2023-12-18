@@ -31,21 +31,10 @@ class LessonType(models.Model):
             type = 'Private'
         return f" {type} {self.age_range} {self.discipline} lesson"
 
-class LiftPass(models.Model):
-
-    class Meta:
-        verbose_name_plural = 'Lift Pass'
-
-    type = models.CharField(max_length=128, null=False, blank=False)
-    price = models.DecimalField(max_digits=6, null=False, blank=False, decimal_places=2)
-
-    def __str__(self):
-        return self.type
-
 class Student(models.Model):
     first_name = models.CharField(null=False, blank=False, max_length=128) 
     last_name = models.CharField(null=False, blank=False, max_length=128)
-    age = models.DateField()
+    dob = models.DateField()
     userAccount = models.ForeignKey(User, null = True, blank = True, on_delete=models.SET_NULL)
 
     def __str__(self):
@@ -56,7 +45,6 @@ class Lesson(models.Model):
     remaining_capacity = models.IntegerField(null=True, blank=False, default=0, editable=False)
     date_time = models.DateTimeField()
     kit_req = models.IntegerField(null=True, blank=False, default=0)
-    lift_pass = models.ForeignKey('LiftPass',null=True, blank=True, on_delete=models.SET_NULL)
     type = models.ForeignKey(LessonType, on_delete=models.CASCADE, related_name="lesson") 
 
 

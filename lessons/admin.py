@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import LessonType, Student, LiftPass, Lesson, Discipline
+from .models import LessonType, Student, Lesson, Discipline
 
 class LessonTypeAdmin(admin.ModelAdmin):
     list_display = (
@@ -7,29 +7,20 @@ class LessonTypeAdmin(admin.ModelAdmin):
         'discipline',
         'age_range',
         'max_capacity',
+        
     )
 
     ordering = ('discipline',)
 
-class LiftPassAdmin(admin.ModelAdmin):
-    list_display = (
-        '__str__',
-        'type',
-        'price',
-    )
-
-    ordering = ('type',)
-
 class StudentAdmin(admin.ModelAdmin):
     list_display = (
         '__str__',
-        'age',
+        'dob',
     )
 
 class LessonAdmin(admin.ModelAdmin):
     list_display = (
         '__str__',
-        'date_time',
         'type',
         'remaining_capacity',
     )
@@ -40,7 +31,6 @@ class LessonAdmin(admin.ModelAdmin):
         'remaining_capacity', 
         'date_time', 
         'kit_req', 
-        'lift_pass', 
         'type', 
     )
 
@@ -57,6 +47,5 @@ class DisciplineAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(LessonType, LessonTypeAdmin)
 admin.site.register(Student, StudentAdmin)
-admin.site.register(LiftPass, LiftPassAdmin)
 admin.site.register(Lesson, LessonAdmin)
 admin.site.register(Discipline, DisciplineAdmin)

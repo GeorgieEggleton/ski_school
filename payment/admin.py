@@ -18,4 +18,13 @@ class OrderAdmin(admin.ModelAdmin):
         'order_total'
     )
 
+class OrderLineItemAdmin(admin.ModelAdmin):
+    model = OrderLineItem
+
+    list_display = (
+        '__str__',
+        'order',
+    )
+
 admin.site.register(Order, OrderAdmin)
+admin.site.register(OrderLineItem, OrderLineItemAdmin)
