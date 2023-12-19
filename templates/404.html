@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="short-strip"></div>
+<div class="row">
+    <div class="col-6 mx-auto">
+        <div class="text-center" id="main-container">
+            <h1>404 - Page Not Found! </h1>
+            <h2> You seem to have gone offpiste!!!!!!</h2>
+            <a class="btn btn-dark mb-5" href="{% url 'home' %}">Head back home....</a>
+            <div class="short-strip"></div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

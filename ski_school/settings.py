@@ -26,6 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+#DEBUG = 'DEVELOPMENT'
 #DEBUG = 'DEVELOPMENT' in os.environ
 
 ALLOWED_HOSTS = [os.environ.get('BASE_URL', ''),
@@ -101,7 +102,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR,'templates'),
-            os.path.join(BASE_DIR, 'templates', 'allauth'), #dont know what this is douing yet - linking template directories?
+            os.path.join(BASE_DIR, 'templates', 'allauth'), 
         ],
         'APP_DIRS': True,
         'OPTIONS': {
