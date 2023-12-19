@@ -112,6 +112,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
                 'bag.context.bag_contents',
+                'marketing.context.signup',
             ],
             'builtins': [
                 'crispy_forms.templatetags.crispy_forms_tags',
@@ -241,3 +242,4 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_KEY')
 #mailchimp
 MAILCHIMP_API_KEY = os.getenv('MAILCHIMP_KEY', '')
 MAILCHIMP_REGION = 'us21'
+MAILCHIMP_MARKETING_AUDIENCE_ID = 'a1f8eb2626'

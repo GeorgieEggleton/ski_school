@@ -7,7 +7,7 @@ from .models import LessonType, Lesson
 def all_lessons(request):
     query = None
     lessonTypes = LessonType.objects.all()
-   
+    
     if request.GET:
         if 'type' in request.GET:
             types = request.GET['type'].split(',')
