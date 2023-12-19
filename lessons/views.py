@@ -51,7 +51,7 @@ def all_lessons(request):
 def lesson_detail(request, lessonType_id):
     lessons = None
     lessonType = get_object_or_404(LessonType, pk=lessonType_id)
-    lessons = Lesson.objects.filter(type__in=lessonType_id)
+    lessons = Lesson.objects.filter(type=lessonType)
 
     context = {
         'lessontype' : lessonType,
