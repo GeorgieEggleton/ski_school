@@ -33,7 +33,8 @@ def bag_contents(request):
                 if request.user.is_authenticated:
                     booked_students = Student.objects.filter(pk__in= lesson_bag_details["students"]).values()       
                     remaining_students = [i for i in associated_students if i not in booked_students ] #takes booked_students away from associated_students
-                
+                    
+                print(f'booked_Students in bagcalc:   {  booked_students.count() }')
                 bag_items.append({
                     'quantity' : booked_students.count(),
                     'lesson_type_price' : int(lesson.type.price * 100), #price (in pence)

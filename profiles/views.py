@@ -30,11 +30,8 @@ def profile_update(request):
 	if request.user.is_authenticated: 
 		try:  
 			profile = get_object_or_404(Profile, user = request.user)  
-		except Profile.DoesNotExist: 
-			profile = Profile.objects.create()
-
-			
-			
+		except:
+			profile = Profile.objects.create(user = request.user)	
 		profile_form_data = Profile_Form(data=request.POST or none, instance = profile)    #allows update of existing profile
 		if profile_form_data.is_valid(): 		
 			profile = profile_form_data.save(commit=False)
@@ -59,8 +56,6 @@ def order_history(request):
 			context = {
 				'full_orders' : full_orders,
 			}
-			
-			#print(OrderLineItem.objects.filter(order = orders[0]))
 			return render(request, 'profiles/order_history.html', context)
 		except Order.DoesNotExist:
 			messages.error(request, f"no orders found") 

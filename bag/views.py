@@ -89,7 +89,6 @@ def update_student_pulldown(request):
                     if previous != None:  
                         bag[lesson_id]["students"].remove(previous) 
                     bag[lesson_id]["students"].append(selected_student_id) 
-
     request.session['bag'] = bag 
     return render(request, 'bag/bag.html') 
 
@@ -108,7 +107,7 @@ def add_student(request):
             newstudent = Student.objects.create( 
                 first_name = str(request.POST.get('first_name')), 
                 last_name = str(request.POST.get('last_name')), 
-                age = request.POST.get('age'), 
+                dob = request.POST.get('age'), 
                 userAccount = request.user 
             )  #creating object from model class 
             newstudent.save() 
@@ -116,4 +115,5 @@ def add_student(request):
 
     else: 
         messages.error(request, f'please log in before adding students') 
+        return redirect('account_login')
     return render(request, 'bag/bag.html') 

@@ -33,7 +33,7 @@ def product_page(request):
 		
 		profile = Profile.objects.get(user=request.user)
 		checkout_session = stripe.checkout.Session.create( #creates the stripe session object which is the root level class https://stripe.com/docs/api/checkout/sessions/object
-			payment_method_types = ['card', 'paypal'],
+			payment_method_types = ['card',],
 			line_items = line_items_stripe,
 			mode = 'payment',
 			customer_creation = 'if_required',

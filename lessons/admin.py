@@ -15,7 +15,7 @@ class LessonTypeAdmin(admin.ModelAdmin):
 class StudentAdmin(admin.ModelAdmin):
     list_display = (
         '__str__',
-        'dob',
+ 
     )
 
 class LessonAdmin(admin.ModelAdmin):

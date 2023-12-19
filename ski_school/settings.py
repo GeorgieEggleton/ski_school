@@ -28,7 +28,11 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 DEBUG = True
 #DEBUG = 'DEVELOPMENT' in os.environ
 
-ALLOWED_HOSTS = ['alps-snow-school.heroku.com', 'localhost', 'alps-snow-school-4dd405a355b2.herokuapp.com']
+ALLOWED_HOSTS = [os.environ.get('BASE_URL', ''),
+                'alps-snow-school.heroku.com', 
+                'localhost', 
+                'alps-snow-school-4dd405a355b2.herokuapp.com',
+                '8000-georgieegglet-skischool-0324olqwrk5.ws-eu107.gitpod.io']
 
 
 # Application definition
@@ -52,6 +56,7 @@ INSTALLED_APPS = [
     'payment',
     'profiles',
     'storages',
+    'marketing',
 
 ]
 
@@ -137,6 +142,14 @@ else:
     }
 
 
+"""
+DATABASES = { 
+
+    'default': dj_database_url.parse('postgres://jmheuyhk:WTZMSjTQDvPa9d3-dPOz5D1_HD4QOjh1@flora.db.elephantsql.com/jmheuyhk') 
+
+} 
+"""
+
  
 
 # Password validation
@@ -219,8 +232,12 @@ STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
 
 #email usage
-EMAIL_HOST = ' smtp.gmail.com'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "georgie.eggleton123"
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_KEY')
+
+#mailchimp
+MAILCHIMP_API_KEY = os.getenv('MAILCHIMP_KEY', '')
+MAILCHIMP_REGION = 'us21'

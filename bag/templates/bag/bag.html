@@ -125,9 +125,9 @@
                             
                             {% endfor %}
                         </select>
-                        <div id="add_student" class="col-sm-6 offset-1 mb-2 add_student"><i
+                        <div id="add_student" class="col-sm-8 offset-1 mb-2 add_student"><i
                                 class="fa-solid fa-circle-plus text-green pointer"></i> Add Student Details </div>
-                        <div id="student_entry_panel" class="slider col-sm-6 offset-1">
+                        <div id="student_entry_panel" class="slider col-sm-10 offset-1">
                             <form class="form" method="POST" action="{% url 'add_student' %}">
                                 {% csrf_token %}
                                 <div class="row">
@@ -138,7 +138,7 @@
                                     <input name="age" class="col-sm-3 offset-1" type="date" value="1">
                                     </input>
                                 </div>
-                                <div class="btn">
+                                <div class="btn col-sm-1 offset-11">
                                     <input type="submit" class="btn btn-outline-black" value="Save">
                                 </div>
                             </form>

@@ -34,7 +34,7 @@ class LessonType(models.Model):
 class Student(models.Model):
     first_name = models.CharField(null=False, blank=False, max_length=128) 
     last_name = models.CharField(null=False, blank=False, max_length=128)
-    dob = models.DateField()
+    dob = models.DateTimeField(blank= True, null = True)
     userAccount = models.ForeignKey(User, null = True, blank = True, on_delete=models.SET_NULL)
 
     def __str__(self):
@@ -48,7 +48,7 @@ class Lesson(models.Model):
     type = models.ForeignKey(LessonType, on_delete=models.CASCADE, related_name="lesson") 
 
 
-    """
+    
     def save(self, *args, **kwargs):
         
 
@@ -56,7 +56,7 @@ class Lesson(models.Model):
         self.remaining_capacity = self.type.max_capacity - self.students.count()
        
         super().save(*args, **kwargs)
-    """
+    
     def __str__(self):
         if self.type.max_capacity > 1:
             type = 'Group'
