@@ -22,9 +22,10 @@
             <hr>
         </div>
     </div>
+    {% if user.is_authenticated %}
     <div class="row">
         <div class="col-12">
-            {% if bag_items %}
+        {% if bag_items %}
 
             {% for item in bag_items %}
             <div class="container grey">
@@ -61,7 +62,7 @@
                 <div class="row">
                     <div class="col-12">
 
-                        {% if user.is_authenticated %}
+
                         {% for booked_student in item.booked_students %}
 
                         <select class="student-update form-control col-sm-6" name="selected_students "
@@ -139,53 +140,50 @@
                             </div>
                         </form>
                     </div>
-
-
                     {% endfor %}
-                    {% endif %}
+
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12 offset-1">
+                        <p>{{ item.lesson_quantity }} Lessons @ £{{ item.lesson_type_price }}
+                            each = £{{ item.subTotal}} </p>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <a class="remove-item text-danger float-right" id="remove_{{ item.item_id}}"
+                            data-product_size="{{ item.sze }}"
+                            href="{% url 'remove_from_bag' item.lesson_id %}"><small>Remove</small></a>
+                    </div>
                 </div>
             </div>
-            <div class="row mt-2">
-                <div class="col-12 offset-1">
-                    <p>{{ item.lesson_quantity }} Lessons @ £{{ item.lesson_type_price }}
-                        each = £{{ item.subTotal}} </p>
-                </div>
-            </div>
-            <div class="row mt-2">
-                <div class="col-12">
-                    <a class="remove-item text-danger float-right" id="remove_{{ item.item_id}}"
-                        data-product_size="{{ item.sze }}"
-                        href="{% url 'remove_from_bag' item.lesson_id %}"><small>Remove</small></a>
-                </div>
-            </div>
+            
+
+
+            {% endfor %}
+            <td class="py-3">
+                <p class="my-0">Total to pay : £{{ total }}</p>
+            </td>
+            <a href="{% url 'product_page' %}" class="btn btn-black rounded-0 btn-lg">
+                <span class="text-uppercase">Secure Checkout</span>
+                <span class="icon">
+                    <i class="fas fa-lock"></i>
+                </span>
+            </a>
+            {% else %}
+            <p class="lead mb-5"> Your bag is empty. </p>
+            <a href="{% url 'home' %}" class="btn btn-outline-black rounded-0 btn-lg">
+                <span class="icon">
+                    <i class="fas fa-chevron-left"></i>
+                </span>
+                <span class="text-uppercase">Return to Lessons</span>
+            </a>
+            {% endif %}
         </div>
-
     </div>
+    {% endif %}
 </div>
 
-{% endfor %}
-<td class="py-3">
-    <p class="my-0">Total to pay : £{{ total }}</p>
-</td>
-<a href="{% url 'product_page' %}" class="btn btn-black rounded-0 btn-lg">
-    <span class="text-uppercase">Secure Checkout</span>
-    <span class="icon">
-        <i class="fas fa-lock"></i>
-    </span>
-</a>
-{% else %}
-<p class="lead mb-5"> Your bag is empty. </p>
-<a href="{% url 'home' %}" class="btn btn-outline-black rounded-0 btn-lg">
-    <span class="icon">
-        <i class="fas fa-chevron-left"></i>
-    </span>
-    <span class="text-uppercase">Return to Lessons</span>
-</a>
-{% endif %}
-</div>
-</div>
-</div>
-</div>
 
 {% endblock %}
 
@@ -212,6 +210,7 @@
 <script type="text/javascript">
     $('.add_student').click(function (e) {
         $(this).next().slideToggle("slow");
+
     })
 </script>
 

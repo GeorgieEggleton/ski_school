@@ -13,33 +13,26 @@
 
 {% block content %}
 
-
-
-<div class="opening-text">
-    You are logged in as: {{ user.email }}
-</div>
-
-<div class="short-strip"></div>
-
-<h1 class="overview-heading">Vendor's Details</h1>
+<h4 class="col-sm-12 text-center"> You are currently logged in as {{ user.email }}</h4>
 
 <div class="row">
     <div class="col-6 mx-auto">
         <div class="text-center">
+            <form class="d-inline" action="{% url 'profile_update' %}" method="POST">
             <p class="overview-label">Name: <span class="overview-info"></span>
                 {{ Profile_Form.full_name | as_crispy_field}}</p>
             <p class="overview-label center-block">Phone Number: <span class="overview-info">
-                {{ Profile_Form.phone_number | as_crispy_field }}</span></p>
+                    {{ Profile_Form.phone_number | as_crispy_field }}</span></p>
             <p class="overview-label">Address: <span class="overview-info">
-                {{ Profile_Form.street_address1 | as_crispy_field }}</span></p>
-            <p class="overview-label">Street Address 1: <span class="overview-info">{{ Profile_Form.street_address2 |
-                    as_crispy_field }}</span></p>
+                    {{ Profile_Form.street_address1 | as_crispy_field }}</span></p>
+            <p class="overview-label" class="overview-info">
+                {{ Profile_Form.street_address2 | as_crispy_field }}</p>
             <p class="overview-info">{{ Profile_Form.street_address2 | as_crispy_field }}</p>
             <p class="overview-info">{{ Profile_Form.town_or_city | as_crispy_field }}</p>
             <p class="overview-info">{{ Profile_Form.county | as_crispy_field }}</p>
             <p class="overview-info">{{ Profile_Form.postcode | as_crispy_field }}</p>
             <p class="overview-info">{{ Profile_Form.country | as_crispy_field }}</p>
-            <form class="d-inline" action="#" method="GET">
+            
                 {% csrf_token %}
                 <button type="submit" name="blogpost_id" value="delete" class="btn-like btn-edit">
                     <p class="subtext">Edit <i class="fa-solid fa-pencil"></i></p>
@@ -52,109 +45,55 @@
 
 <div class="short-strip"></div>
 
-<h1 class="overview-heading">Your associated students</h1>
-<div class="business_list_container">
-    <div>
-        {% for associated_student in associated_students %}
-        <a class="text"> {{ associated_student.first_name}} {{ associated_student.last_name}}   
-            {{ associated_student.dob }} </a>
+<h4 class="overview-heading">Your associated students</h4>
 
-        <div id="add_student" class="col-sm-8 offset-1 mb-2 add_student"><i
-                class="fa-solid fa-circle-plus text-green pointer"></i> Add Student Details </div>
-        <div id="student_entry_panel" class="slider col-sm-10 offset-1">
-            <form class="form" method="POST" action="{% url 'add_student' %}">
-                {% csrf_token %}
-                <div class="row">
-                    <input name="first_name" class="col-sm-3 offset-1" type="text" value="First Name">
-                    </input>
-                    <input name="last_name" class="col-sm-3 offset-1" type="text" value="Last Name">
-                    </input>
-                    <input name="age" class="col-sm-3 offset-1" type="date" value="1">
-                    </input>
-                </div>
-                <div class="btn col-sm-1 offset-11">
-                    <input type="submit" class="btn btn-outline-black" value="Save">
-                </div>
-            </form>
-        </div>
+<div>
+    {% for associated_student in associated_students %}
+    <a class="text"> {{ associated_student.first_name}} {{ associated_student.last_name}}
+        {{ associated_student.dob }} </a>
 
-
-
-        <div id="add_student" class="add_student col-sm-6">
-            <p class="add_student">+ Add Student</p>
-        </div>
-        <div id="student_entry_panel p-3" class="slider">
-            <form class="form " method="POST" action="{% url 'add_student' %}">
-                {% csrf_token %}
-                <div class="row">
-                    <input name="first_name" class="col-sm-3 offset-1" type="text" value="First Name">
-                    </input>
-                    <input name="last_name" class="col-sm-3 offset-1" type="text" value="Last Name">
-                    </input>
-                    <input name="age" class="col-sm-3 offset-1" type="date" value="1">
-                    </input>
-                </div>
-                <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5"
-                    value="Add Student Details">
-            </form>
-        </div>
-
-        <form class="d-inline" action="#" method="POST">
+    <div id="add_student" class="col-sm-8 offset-1 mb-2 add_student"><i
+            class="fa-solid fa-circle-plus text-green pointer"></i> Add another student </div>
+    <div id="student_entry_panel" class="slider col-sm-10 offset-1">
+        <form class="form" method="POST" action="{% url 'add_student' %}">
             {% csrf_token %}
-
-            </a>
-            <button type="submit" name="blogpost_id" value="delete" class="btn-like"><i
-                    class="fa-solid fa-trash"></i></button>
+            <div class="row">
+                <input name="first_name" class="col-sm-3 offset-1" type="text" value="First Name">
+                </input>
+                <input name="last_name" class="col-sm-3 offset-1" type="text" value="Last Name">
+                </input>
+                <input name="age" class="col-sm-3 offset-1" type="date" value="1">
+                </input>
+            </div>
+            <div class="btn col-sm-1 offset-11">
+                <input type="submit" class="btn btn-outline-black" value="Save">
+            </div>
         </form>
-
-        <form class="d-inline" action="#" method="GET">
-            {% csrf_token %}
-            <button type="submit" name="blogpost_id" value="delete" class="btn-like"><i
-                    class="fa-solid fa-pencil"></i></button>
-        </form>
-
-        {% endfor %}
+    </div>
 
 
+    <form class="d-inline" action="#" method="POST">
+        {% csrf_token %}
+        <a> Delete Student </a>
+        <button type="submit" name="blogpost_id" value="delete" class="btn-like">
+            <i class="fa-solid fa-trash"></i></button>
+    </form>
 
+    <form class="d-inline" action="#" method="GET">
+        {% csrf_token %}
+        <a> edit student details </a>
+        <button type="submit" name="blogpost_id" value="delete" class="btn-like"><i
+                class="fa-solid fa-pencil"></i></button>
+    </form>
+</div>
+{% endfor %}
 
+{% endblock %}
 
-
-
-
-
-
-
-
-
-
-
-        <div class="col-12 col-lg-6">
-            <p class="text-muted">Please fill out the form below to complete your profile creation</p>
-            <form class="form" method="POST" action="{% url 'profile_update' %}">
-                {% csrf_token %}
-                <fieldset class="rounded px-3 mb-5">
-                    <legend class="fieldset-label small text-black px-2 w-auto">Details</legend>
-                    {{ Profile_Form.full_name | as_crispy_field }}
-                </fieldset>
-                <fieldset class="rounded px-3 mb-5">
-                    <legend class="fieldset-label small text-black px-2 w-auto">Address</legend>
-                    {{ Profile_Form.phone_number | as_crispy_field }}
-                    {{ Profile_Form.street_address1 | as_crispy_field }}
-                    {{ Profile_Form.street_address2 | as_crispy_field }}
-                    {{ Profile_Form.town_or_city | as_crispy_field }}
-                    {{ Profile_Form.county | as_crispy_field }}
-                    {{ Profile_Form.postcode | as_crispy_field }}
-                    {{ Profile_Form.country | as_crispy_field }}
-                    <div class="form-check form-check-inline float-right mr-0">
-                    </div>
-                </fieldset>
-                <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5" value="Update Profile">
-            </form>
-        </div>
-
-        {% endblock %}
-
-        {% block postloadjs %}
-
-        {% endblock %}
+{% block postloadjs %}
+<script type="text/javascript">
+    $('.add_student').click(function (e) {
+        $(this).next().slideToggle("slow");
+    })
+</script>
+{% endblock %}

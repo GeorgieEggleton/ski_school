@@ -7,6 +7,7 @@ from django.contrib import messages
 
 def profile_creation(request):
 	profile_form = Profile_Form()
+	associated_students = Student.objects.filter(userAccount = request.user)
 	try:
 		profile_name = get_object_or_404(Profile, user=request.user)
 		profile_form_entry = {
@@ -22,33 +23,36 @@ def profile_creation(request):
 		profile_form = Profile_Form(profile_form_entry)
 		
 	finally:
-		context = {'Profile_Form' : profile_form}
+		context = {'Profile_Form' : profile_form,
+		'associated_students' : associated_students}
 		return render(request, 'profiles/profile.html', context)
 
 
 def profile_update(request):
 
-	if request.user.is_authenticated: 
-		try:  
-			profile = get_object_or_404(Profile, user = request.user)  
-		except:
-			profile = Profile.objects.create(user = request.user)	
-		profile_form_data = Profile_Form(data=request.POST or none, instance = profile)    #allows update of existing profile
-		if profile_form_data.is_valid(): 		
-			profile = profile_form_data.save(commit=False)
-			profile.save()
-		try:  
-			associated_students = Student.objects.filter(userAccount = request.user)
-		except:
-			associated_students = []
-	else: 
-		messages.error(request, f"Oh dear, you don't seem to be logged in. PLease log in an return") 
-		return redirect(account.login)
-	context = {
-			'Profile_Form' : profile_form_data,
-			'associated_students' : associated_students
-	}
-	return render(request, 'profiles/profile.html', context)
+	if request.method == 'POST':
+		if request.user.is_authenticated:
+			try:  
+				profile = get_object_or_404(Profile, user = request.user)  
+			except:
+				profile = Profile.objects.create(user = request.user)	
+			profile_form_data = Profile_Form(data=request.POST or none, instance = profile)    #allows update of existing profile
+			if profile_form_data.is_valid(): 		
+				profile = profile_form_data.save(commit=False)
+				profile.save()
+			try:  
+				associated_students = Student.objects.filter(userAccount = request.user)
+			except:
+				associated_students = []
+		else: 
+			messages.error(request, f"Oh dear, you don't seem to be logged in. PLease log in an return") 
+			return redirect(account.login)
+		context = {
+				'Profile_Form' : profile_form_data,
+				'associated_students' : associated_students
+		}
+		return render(request, 'profiles/profile.html', context)
+	return redirect(profile_creation)
 	
 def order_history(request):
 	orders = []
@@ -101,3 +105,10 @@ def add_student(request):
         return redirect('account_login')
 
     return redirect(redirect_url)
+
+def delete_student(request, student_id):
+	
+	#if student_id:
+#		try:
+			
+	return redirect(profile_creation)

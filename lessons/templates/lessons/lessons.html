@@ -30,7 +30,7 @@
     <div class="row my-auto text-center">
         <div class="heading text-center col-6 offset-3">
             <h1>Kids Lessons</h1>
-            <p> Our adult ski lessone are really great whatever your ski ability. Here is some more text about how
+            <p> Our adult ski lessone are reallywhatever your ski ability. Here is some more text about how
                 wonderful they are!</p>
         </div>
     </div>
@@ -47,6 +47,7 @@
             </a>
             <div class="card-body">
                 <h1>{{ L.age_range }} {%if L.max_capacity > 1 %} Group {% else %} Private {% endif %} {{ L.discipline }} Lesson</h1>
+                <h2>{{ L.level}}</h2>
                 <p class="card-text">{{ L.brief_description }}</p>
                     <a href="{% url 'lesson_detail' L.id %}" class="btn btn-primary btn-book">Book Now ></a>    
             </div>

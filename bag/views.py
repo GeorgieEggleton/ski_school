@@ -25,16 +25,14 @@ def add_to_bag(request, item_id):
                 messages.error(request, f'There are no places remaining on {lesson_whole}') 
             else: 
                 messages.error(request, f'There are only {lesson_whole.remaining_capacity - bag[lesson]} places remaining on {lesson_whole}') 
-
     else: 
         bag[lesson] = {"quantity": quantity, 
                         "students" :[] 
                         } 
-
         messages.success(request, f'Added {lesson} to your bag') 
-
+    
     request.session['bag'] = bag 
-    print(bag)
+    
     return redirect(redirect_url) 
 
 def update_bag(request, lesson_id): 
@@ -69,8 +67,7 @@ def remove_from_bag(request, lesson_id):
  
 
 def update_student_pulldown(request): 
-
-    #lesson = get_object_or_404(Lesson, pk=lesson_id) 
+    print(f"i'm here")
     bag = request.session.get('bag', {}) 
     lesson_id = str(request.POST.get('lesson_id')) 
     remove = str(request.POST.get('remove')) 
@@ -89,5 +86,6 @@ def update_student_pulldown(request):
                     if previous != None:  
                         bag[lesson_id]["students"].remove(previous) 
                     bag[lesson_id]["students"].append(selected_student_id) 
+    print(f' Add to bag - bag: {bag}')
     request.session['bag'] = bag 
     return render(request, 'bag/bag.html') 

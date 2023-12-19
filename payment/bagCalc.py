@@ -12,7 +12,7 @@ def bag_contents(request):
     bag = request.session.get('bag',{}) #retreaving "bag" from the session
     booked_students = []
     remaining_students = []
-
+    print(f'bag:   {bag} ')
 
     if request.user.is_authenticated:
         associated_students =  Student.objects.filter(userAccount = request.user).values()

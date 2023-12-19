@@ -22,8 +22,10 @@ def mailchimp_ping_view(request):
     return JsonResponse(response)
 
 def subscribe_view(request):
+    redirect_url = request.POST.get('redirect_url') 
+    print(f'in subscribe')
     if request.method == 'POST':
-        redirect_url = request.POST.get('redirect_url')        
+               
         form = EmailForm(request.POST)
         if form.is_valid():
             try:
