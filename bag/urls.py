@@ -8,6 +8,6 @@ urlpatterns = [
     path ('update/<lesson_id>/', views.update_bag, name='update_bag'),
     path ('update_student_pulldown/', views.update_student_pulldown, name='update_student_pulldown'),
     path ('add_student/update_student_pulldown/', views.update_student_pulldown, name='update_student_pulldown'),
-    path ('add_student/', views.add_student, name='add_student'),
+   
     
 ]

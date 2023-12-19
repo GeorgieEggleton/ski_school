@@ -3,6 +3,6 @@ from .forms import EmailForm
 
 def signup(request):
     context = {
-        'form': EmailForm(),
+        'newsletter_form': EmailForm(),
     }
     return context

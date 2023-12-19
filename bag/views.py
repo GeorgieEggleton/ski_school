@@ -91,29 +91,3 @@ def update_student_pulldown(request):
                     bag[lesson_id]["students"].append(selected_student_id) 
     request.session['bag'] = bag 
     return render(request, 'bag/bag.html') 
-
-def add_student(request): 
-
-    studentExists = False 
-    if request.user.is_authenticated: # if the user is logged in 
-        linkedStudents = Student.objects.filter(userAccount = request.user).values() #lookup all students associated with login 
-        for linkedStudent in linkedStudents: 
-            if str(request.POST.get('first_name')) in linkedStudent.values(): 
-                if str(request.POST.get('last_name')) in linkedStudent.values(): 
-                    messages.error(request, f'Student already exists') 
-                    studentExists = True 
-
-        if not studentExists: 
-            newstudent = Student.objects.create( 
-                first_name = str(request.POST.get('first_name')), 
-                last_name = str(request.POST.get('last_name')), 
-                dob = request.POST.get('age'), 
-                userAccount = request.user 
-            )  #creating object from model class 
-            newstudent.save() 
-            messages.info(request, f'New Student Saved') 
-
-    else: 
-        messages.error(request, f'please log in before adding students') 
-        return redirect('account_login')
-    return render(request, 'bag/bag.html') 

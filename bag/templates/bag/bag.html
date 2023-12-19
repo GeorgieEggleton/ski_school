@@ -73,21 +73,22 @@
                             <option value="{{ student.id }}" class="student-selection col-sm-6"
                                 data-previous="{{booked_student.id}}" data-lesson_id="{{ item.lesson_id }}">
                                 {{student.first_name }}
-                                {{student.second_name}}
+                                {{student.last_name }}
                             </option>
                             {% endfor %}
 
                             <option value="{{booked_student.id}}" class="student-selection"
-                                data-lesson_id="{{ item.lesson_id }}" selected> {{ booked_student.first_name}}
-                                {{booked_student.second_name}}
+                                data-lesson_id="{{ item.lesson_id }}" selected>
+                                {{ booked_student.first_name}}
+                                {{booked_student.last_name }}
                             </option>
                         </select>
 
-                        <div id="add_student" class="add_student">
+                        <div id="add_student" class="add_student col-sm-6">
                             <p class="add_student">+ Add Student</p>
                         </div>
-                        <div id="student_entry_panel" class="slider">
-                            <form class="form" method="POST" action="{% url 'add_student' %}">
+                        <div id="student_entry_panel p-3" class="slider">
+                            <form class="form " method="POST" action="{% url 'add_student' %}">
                                 {% csrf_token %}
                                 <div class="row">
                                     <input name="first_name" class="col-sm-3 offset-1" type="text" value="First Name">
@@ -96,94 +97,91 @@
                                     </input>
                                     <input name="age" class="col-sm-3 offset-1" type="date" value="1">
                                     </input>
-                                </div>
-                                <div class="btn btn-outline-black rounded-0 btn-lg">
-                                    <span class="icon">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </span>
-                                    <span class="text-uppercase">Remove Student</span>
                                 </div>
                                 <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5"
                                     value="Add Student Details">
                             </form>
                         </div>
                         {% endfor %}
+                    </div>
+                    {% for i in item.lesson_quantity_range %}
 
-                        {% for i in item.lesson_quantity_range %}
-                        
-                        <select class="student-update form-control rounded-0 col-sm-6 offset-1 mb-1"
-                            name="selected_students_{{ i }}" id='select_students'>
-                            <option value="" class="student-selection coll-sm-6" selected> Select Student from dropdown:
-                            </option>
-                           
-                            {% for student in item.associated_students %}
-                        
-                            <option value="{{ student.id }}" class="student-selection"
-                                data-lesson_id="{{ item.lesson_id }}"> {{ student.first_name }}
-                                {{student.second_name}}
-                            </option>
-                            
-                            {% endfor %}
-                        </select>
-                        <div id="add_student" class="col-sm-8 offset-1 mb-2 add_student"><i
-                                class="fa-solid fa-circle-plus text-green pointer"></i> Add Student Details </div>
-                        <div id="student_entry_panel" class="slider col-sm-10 offset-1">
-                            <form class="form" method="POST" action="{% url 'add_student' %}">
-                                {% csrf_token %}
-                                <div class="row">
-                                    <input name="first_name" class="col-sm-3 offset-1" type="text" value="First Name">
-                                    </input>
-                                    <input name="last_name" class="col-sm-3 offset-1" type="text" value="Last Name">
-                                    </input>
-                                    <input name="age" class="col-sm-3 offset-1" type="date" value="1">
-                                    </input>
-                                </div>
-                                <div class="btn col-sm-1 offset-11">
-                                    <input type="submit" class="btn btn-outline-black" value="Save">
-                                </div>
-                            </form>
-                        </div>
+                    <select class="student-update form-control rounded-0 col-sm-6 offset-1 mb-1"
+                        name="selected_students_{{ i }}" id='select_students'>
+                        <option value="" class="student-selection coll-sm-6" selected> Select Student from dropdown:
+                        </option>
 
+                        {% for student in item.associated_students %}
+
+                        <option value="{{ student.id }}" class="student-selection"
+                            data-lesson_id="{{ item.lesson_id }}"> {{ student.first_name }}
+                            {{student.second_name}}
+                        </option>
 
                         {% endfor %}
-                        {% endif %}
+                    </select>
+                    <div id="add_student" class="col-sm-8 offset-1 mb-2 add_student"><i
+                            class="fa-solid fa-circle-plus text-green pointer"></i> Add Student Details </div>
+                    <div id="student_entry_panel" class="slider col-sm-10 offset-1">
+                        <form class="form" method="POST" action="{% url 'add_student' %}">
+                            {% csrf_token %}
+                            <div class="row">
+                                <input name="first_name" class="col-sm-3 offset-1" type="text" value="First Name">
+                                </input>
+                                <input name="last_name" class="col-sm-3 offset-1" type="text" value="Last Name">
+                                </input>
+                                <input name="age" class="col-sm-3 offset-1" type="date" value="1">
+                                </input>
+                            </div>
+                            <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                            <div class="btn col-sm-1 offset-11">
+                                <input type="submit" class="btn btn-outline-black" value="Save">
+                            </div>
+                        </form>
                     </div>
+
+
+                    {% endfor %}
+                    {% endif %}
                 </div>
-                <div class="row mt-2">
-                    <div class="col-12 offset-1">
-                        <p>{{ item.lesson_quantity }} Lessons @ £{{ item.lesson_type_price }} 
-                            each = £{{ item.subTotal}} </p>
-                    </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12 offset-1">
+                    <p>{{ item.lesson_quantity }} Lessons @ £{{ item.lesson_type_price }}
+                        each = £{{ item.subTotal}} </p>
                 </div>
             </div>
             <div class="row mt-2">
                 <div class="col-12">
                     <a class="remove-item text-danger float-right" id="remove_{{ item.item_id}}"
-                        data-product_size="{{ item.sze }}" href = "{% url 'remove_from_bag' item.lesson_id %}"><small>Remove</small></a>
+                        data-product_size="{{ item.sze }}"
+                        href="{% url 'remove_from_bag' item.lesson_id %}"><small>Remove</small></a>
                 </div>
             </div>
         </div>
-    </div>
 
-    {% endfor %}
-    <td class="py-3">
-        <p class="my-0">Total to pay : ${{ total }}</p>
-    </td>
-    <a href="{% url 'product_page' %}" class="btn btn-black rounded-0 btn-lg">
-        <span class="text-uppercase">Secure Checkout</span>
-        <span class="icon">
-            <i class="fas fa-lock"></i>
-        </span>
-    </a>
-    {% else %}
-    <p class="lead mb-5"> Your bag is empty. </p>
-    <a href="{% url 'home' %}" class="btn btn-outline-black rounded-0 btn-lg">
-        <span class="icon">
-            <i class="fas fa-chevron-left"></i>
-        </span>
-        <span class="text-uppercase">Keep Shopping</span>
-    </a>
-    {% endif %}
+    </div>
+</div>
+
+{% endfor %}
+<td class="py-3">
+    <p class="my-0">Total to pay : £{{ total }}</p>
+</td>
+<a href="{% url 'product_page' %}" class="btn btn-black rounded-0 btn-lg">
+    <span class="text-uppercase">Secure Checkout</span>
+    <span class="icon">
+        <i class="fas fa-lock"></i>
+    </span>
+</a>
+{% else %}
+<p class="lead mb-5"> Your bag is empty. </p>
+<a href="{% url 'home' %}" class="btn btn-outline-black rounded-0 btn-lg">
+    <span class="icon">
+        <i class="fas fa-chevron-left"></i>
+    </span>
+    <span class="text-uppercase">Return to Lessons</span>
+</a>
+{% endif %}
 </div>
 </div>
 </div>

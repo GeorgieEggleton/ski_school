@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from payment.models import Order, OrderLineItem
 from .forms import Profile_Form
 from .models import Profile
+from lessons.models import Student
 from django.contrib import messages
 
 def profile_creation(request):
@@ -36,8 +37,17 @@ def profile_update(request):
 		if profile_form_data.is_valid(): 		
 			profile = profile_form_data.save(commit=False)
 			profile.save()
-	else: redirect(account.login)
-	context = {'Profile_Form' : profile_form_data}
+		try:  
+			associated_students = Student.objects.filter(userAccount = request.user)
+		except:
+			associated_students = []
+	else: 
+		messages.error(request, f"Oh dear, you don't seem to be logged in. PLease log in an return") 
+		return redirect(account.login)
+	context = {
+			'Profile_Form' : profile_form_data,
+			'associated_students' : associated_students
+	}
 	return render(request, 'profiles/profile.html', context)
 	
 def order_history(request):
@@ -62,3 +72,32 @@ def order_history(request):
 			return redirect('home')
 	else:
 		return redirect('account_login')
+
+
+def add_student(request): 
+
+    studentExists = False 
+    redirect_url = request.POST.get('redirect_url')   
+    if request.user.is_authenticated: # if the user is logged in 
+        linkedStudents = Student.objects.filter(userAccount = request.user).values() #lookup all students associated with login 
+        for linkedStudent in linkedStudents: 
+            if str(request.POST.get('first_name')) in linkedStudent.values(): 
+                if str(request.POST.get('last_name')) in linkedStudent.values(): 
+                    messages.error(request, f'Student already exists') 
+                    studentExists = True 
+
+        if not studentExists: 
+            newstudent = Student.objects.create( 
+                first_name = str(request.POST.get('first_name')), 
+                last_name = str(request.POST.get('last_name')), 
+                dob = request.POST.get('age'), 
+                userAccount = request.user 
+            )  #creating object from model class 
+            newstudent.save() 
+            messages.info(request, f'New Student Saved') 
+
+    else: 
+        messages.error(request, f'please log in before adding students') 
+        return redirect('account_login')
+
+    return redirect(redirect_url)

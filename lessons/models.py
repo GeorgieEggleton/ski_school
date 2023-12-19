@@ -29,7 +29,7 @@ class LessonType(models.Model):
             type = 'Group'
         else:
             type = 'Private'
-        return f" {type} {self.age_range} {self.discipline} lesson"
+        return f" {type} {self.age_range} {self.discipline} lesson - {self.level}"
 
 class Student(models.Model):
     first_name = models.CharField(null=False, blank=False, max_length=128) 
@@ -43,7 +43,7 @@ class Student(models.Model):
 class Lesson(models.Model):
     students = models.ManyToManyField(Student, blank=True)
     remaining_capacity = models.IntegerField(null=True, blank=False, default=0, editable=False)
-    date_time = models.DateTimeField()
+    date_time = models.DateTimeField(blank= True, null = True)
     kit_req = models.IntegerField(null=True, blank=False, default=0)
     type = models.ForeignKey(LessonType, on_delete=models.CASCADE, related_name="lesson") 
 

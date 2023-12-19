@@ -174,7 +174,7 @@
                 <p class="text-white"> Signup to our Newsletter to keep up to date with everything at Alps Snow Schools</p>
                 <form class="form " action="{% url 'subscribe'%}" method="POST">
                     {% csrf_token %}
-                    {{ form.email | as_crispy_field }}
+                    {{ newsletter_form.email | as_crispy_field }}
                     <input type="hidden" name="redirect_url" value="{{ request.path }}">  
                     <input type="submit" class="btn-outline-white" value="Sign up">               
                 </form>
