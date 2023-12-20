@@ -71,7 +71,7 @@ def order_history(request):
 				for line_item_in_order in line_items_in_order:
 					full_line_item.append({'lineitem': line_item_in_order, 'students' : line_item_in_order.students.all()})
 				full_orders.append({'order': order, 'lineitems': full_line_item })
-			print(f"full orders      { full_orders}")
+
 			context = {
 				'full_orders' : full_orders,
 			}
@@ -82,12 +82,11 @@ def order_history(request):
 	else:
 		return redirect('account_login')
 
-
 def add_student(request): 
 
     studentExists = False 
     redirect_url = request.POST.get('redirect_url')   
-    if request.user.is_authenticated: # if the user is logged in 
+    if request.user.is_authenticated:
         linkedStudents = Student.objects.filter(userAccount = request.user).values() #lookup all students associated with login 
         for linkedStudent in linkedStudents: 
             if str(request.POST.get('first_name')) in linkedStudent.values(): 

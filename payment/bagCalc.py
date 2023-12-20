@@ -12,7 +12,7 @@ def bag_contents(request):
     bag = request.session.get('bag',{}) #retreaving "bag" from the session
     booked_students = []
     remaining_students = []
-    print(f'bag:   {bag} ')
+
 
     if request.user.is_authenticated:
         associated_students =  Student.objects.filter(userAccount = request.user).values()
@@ -34,7 +34,6 @@ def bag_contents(request):
                     booked_students = Student.objects.filter(pk__in= lesson_bag_details["students"]).values()       
                     remaining_students = [i for i in associated_students if i not in booked_students ] #takes booked_students away from associated_students
                     
-                print(f'booked_Students in bagcalc:   {  booked_students.count() }')
                 bag_items.append({
                     'quantity' : booked_students.count(),
                     'lesson_type_price' : int(lesson.type.price * 100), #price (in pence)
@@ -50,18 +49,3 @@ def bag_contents(request):
         'bag_items' : bag_items,
         'total': total,
     }
-
-
-
-"""
-'lesson_id': lesson_id,
-'lesson_quantity': lesson_bag_details["quantity"],
-'lesson_quantity_range' : [*range(lesson_bag_details["quantity"] - len(booked_students))], #really longwinded way of  getting an unpacked list to allow .html to printa dropdown fo the number of students on the list.  JInija "range"does nto seem to be supported on Django
-
-
-'formatted_lessontime' : lesson.date_time.strftime("%H%M on %a %d %m %Y"),
-'formatted_lesson_id' : f' {lesson.date_time.strftime("%y")}-{lesson_id}',
-'subTotal' : subTotal,
-'booked_students' : booked_students,
-'associated_students' :  remaining_students
-"""

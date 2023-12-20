@@ -18,7 +18,7 @@ def add_to_bag(request, item_id):
     redirect_url = request.POST.get('redirect_url') 
     bag = request.session.get('bag', {}) 
     lesson_whole = get_object_or_404(Lesson, pk=lesson) 
-    print(bag)
+
     if lesson in list(bag.keys()): 
         if bag[lesson]["quantity"] + quantity <= lesson_whole.remaining_capacity: 
             bag[lesson]["quantity"] += quantity 
@@ -40,6 +40,8 @@ def add_to_bag(request, item_id):
 
 def update_bag(request, lesson_id): 
 
+    """updates the bag whent he quantity of lessons booked has changed"""
+
     lesson = get_object_or_404(Lesson, pk=lesson_id) 
     bag = request.session.get('bag', {}) 
     quantity = int(request.POST.get('quantity')) 
@@ -56,6 +58,8 @@ def update_bag(request, lesson_id):
 
 def remove_from_bag(request, lesson_id): 
 
+    """ Removes the selected lesson feromt he bag"""
+
     try: 
         lesson = get_object_or_404(Lesson, pk=lesson_id) 
         bag = request.session.get('bag', {}) 
@@ -67,10 +71,11 @@ def remove_from_bag(request, lesson_id):
         messages.error(request, f'Error removing item; {e}') 
         return render(request, 'bag/bag.html') 
 
- 
-
 def update_student_pulldown(request): 
-    print(f"i'm here")
+
+    """Changes the available students that can be placed on a single
+    course, based on previous user selection."""
+
     bag = request.session.get('bag', {}) 
     lesson_id = str(request.POST.get('lesson_id')) 
     remove = str(request.POST.get('remove')) 
@@ -83,12 +88,10 @@ def update_student_pulldown(request):
 
     else: 
         if lesson_id in list(bag.keys()): 
-            print( f"   in here    " ) 
             if len(bag[lesson_id]["students"]) <= bag[lesson_id]["quantity"]: 
                 if selected_student_id not in bag[lesson_id]["students"]: 
                     if previous != None:  
                         bag[lesson_id]["students"].remove(previous) 
                     bag[lesson_id]["students"].append(selected_student_id) 
-    print(f' Add to bag - bag: {bag}')
     request.session['bag'] = bag 
     return render(request, 'bag/bag.html') 

@@ -53,7 +53,6 @@ def payment_successful(request):
 		stripe.api_key = settings.STRIPE_SECRET_KEY
 		checkout_session_id = request.GET.get('session_id', None)
 		session = stripe.checkout.Session.retrieve(checkout_session_id)
-		print(f"Stripe Session {session}")
 		try:  
 			order = Order.objects.get(user=request.user)
 		except Order.DoesNotExist: 

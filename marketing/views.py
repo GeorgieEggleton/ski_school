@@ -23,7 +23,6 @@ def mailchimp_ping_view(request):
 
 def subscribe_view(request):
     redirect_url = request.POST.get('redirect_url') 
-    print(f'in subscribe')
     if request.method == 'POST':
                
         form = EmailForm(request.POST)

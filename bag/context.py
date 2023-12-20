@@ -35,7 +35,7 @@ def bag_contents(request):
             bag_items.append({
                 'lesson_id': lesson_id,
                 'lesson_quantity': lesson_bag_details["quantity"],
-                'lesson_quantity_range' : [*range(lesson_bag_details["quantity"] - len(booked_students))], #really longwinded way of  getting an unpacked list to allow .html to printa dropdown fo the number of students on the list.  JInija "range"does nto seem to be supported on Django
+                'lesson_quantity_range' : [*range(lesson_bag_details["quantity"] - len(booked_students))], #really longwinded way of  getting an unpacked list to allow .html to printa dropdown fo the number of students on the list.  Jinija "range"does nto seem to be supported on Django
                 'lesson' : lesson,
                 'lesson_type_price' : lesson.type.price,
                 'formatted_lessontime' : lesson.date_time.strftime("%H%M on %a %d %m %Y"),

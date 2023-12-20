@@ -5,6 +5,9 @@ from .models import LessonType, Lesson
 
 
 def all_lessons(request):
+
+    """queriers the lessonType database and returns the relevent lesson types to the user.  
+    Executes either a manula search from the searchbar or cliked though the menu"""
     query = None
     lessonTypes = LessonType.objects.all()
     
@@ -12,7 +15,7 @@ def all_lessons(request):
         if 'type' in request.GET:
             types = request.GET['type'].split(',')
             lessonTypes = lessonTypes.filter() #find all instances of the lessonType pre-filter
-            # input in the format [disapline,age,capacity] Ski,,
+                                                # input in the format [disapline,age,capacity] Ski,,
             try:
                 if types[0] != '': # making Django use '' as a whild card rather than  blocking everything
                     lessonTypes = lessonTypes.filter(Q(discipline__name__in=types))                  
@@ -39,7 +42,6 @@ def all_lessons(request):
                         Q(brief_description__icontains=query) | 
                         Q(age_range__icontains=query) | 
                         Q(level__icontains=query))
-            print(queries)
             lessonTypes = lessonTypes.filter(queries)
             context = {
                 'lessontypes' : lessonTypes,
@@ -49,6 +51,10 @@ def all_lessons(request):
     return render(request, 'lessons/lessons.html', context)
 
 def lesson_detail(request, lessonType_id):
+
+    """Returns detail of the a selected lesson"""
+
+
     lessons = None
     lessonType = get_object_or_404(LessonType, pk=lessonType_id)
     lessons = Lesson.objects.filter(type=lessonType)
