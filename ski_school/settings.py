@@ -233,11 +233,14 @@ STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
 
 #email usage
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "georgie.eggleton123@gmail.com"
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_KEY')
+EMAIL_PORT = 587
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
+DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+
+
 
 #mailchimp
 MAILCHIMP_API_KEY = os.getenv('MAILCHIMP_KEY', '')
