@@ -31,7 +31,11 @@ def product_page(request):
 					'quantity' : item['quantity'],
 					})
 		
-		profile = Profile.objects.get(user=request.user)
+		try:
+			profile = Profile.objects.get(user=request.user)
+		except:
+			messages.error(request, f'Please create your user profile')
+			return redirect(profiles)
 		checkout_session = stripe.checkout.Session.create( #creates the stripe session object which is the root level class https://stripe.com/docs/api/checkout/sessions/object
 			payment_method_types = ['card',],
 			line_items = line_items_stripe,
