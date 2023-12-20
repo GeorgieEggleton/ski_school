@@ -106,6 +106,11 @@ On clicking Checkout the user will be redirected to the strip payment page where
 
 ![Payment Success](/media/ReadMe_images/Payment%20success%20screenshot.png)
 
+### Custom 404
+A custom 404 page is included
+
+![Custom 404](/media/ReadMe_images/404_screenshot.png)
+
 
 ### NewsLetter Signup
 Also included in the footer is the newsletter signup box. This is to encourage users to signup for the newsletter in the simplest, quickest way possible so that they are more likely to do it. This is important for future marketing campaigns and ensuring the company is able to make direct contact with potential customers. 
@@ -131,6 +136,8 @@ While the sites Must-Have functionality is now working there are still a few “
 
 ## Database Schema
 Here is the Database Schema for the project :
+
+![Database Schema](/media/ReadMe_images/database_schema.png)
 
 ## Technologies Used
 #### Languages
@@ -195,3 +202,31 @@ Git – Regular commit messages were used throughout development using the follo
 ![Testing-Registration](/media/ReadMe_images/testing_registration.png)
 ![Testing-Lesson Details](/media/ReadMe_images/testing_lesson_details.png)
 ![Testing-Summary](/media/ReadMe_images/testing_summery.png)
+
+# Business Plan, Marketing & SEO 
+
+Alps Snow School was designed and implemented to meet a gap in the snow sport tuition market. While conducting market research I found that a lot of the existing snow sport schools did not have options to book lessons online and a lot of the information was hard to find and over complicated.  
+
+The idea with Alps Snow School was to make the lesson booking process as simple as possible and allow the user to book and register their family members onto a lesson without having to contact the school directly.  
+
+In order to market Alps Snow School a number of different routes will be used.  
+
+  
+
+Social Media channels will be used as a great way to boost and increase engagement with the business. A combination of organic and paid social media advertising will be used to promote the facebook business page to a targeted audience.  
+
+![Facebook Buisness](/media/ReadMe_images/Facebook_business_Screenshot.png)
+
+A newsletter signup box is included in the footer of all pages to encourage users to signup meaning the company is able to make direct contact with potential customers to tell them about important news and future offers.  
+
+![Mailshot Example](/media/ReadMe_images/Mailshot_Screenshot%20.png)
+
+Inclusion of site.xml file and robots.txt. file. 
+
+The robots.txt file is required by google to tell it which sections of the website should be ignored when the google spiders crawl the website to decide on where it should place within the google pages on search result. I have included my robots.txt file in the root directory, as directed in tutorials.  
+
+I ran a site.xml file on ' https://www.xml-sitemaps.com/' and have included this in the root directory, as specified in tutorials. 
+
+Meta Tags 
+
+I have included detailed meta tags in the <head> of the html with a combination of long tails and short tail keywords relevant to my site. 

@@ -35,7 +35,7 @@ def bag_contents(request):
                     remaining_students = [i for i in associated_students if i not in booked_students ] #takes booked_students away from associated_students
                     
                 bag_items.append({
-                    'quantity' : booked_students.count(),
+                    'quantity' : lesson_bag_details["quantity"],
                     'lesson_type_price' : int(lesson.type.price * 100), #price (in pence)
                     'lesson' : lesson,
                     'booked_students' : booked_students,

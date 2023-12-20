@@ -186,7 +186,8 @@
 {{ block.super }}
 
 <script type="text/javascript">
-    $('.student_selection').click(function (e) {
+   $('.student_selection').click(function (e) {
+ 
         $.ajax({
             type: 'POST',
             url: 'update_student_pulldown/',
@@ -197,7 +198,7 @@
                 remove: $(this).data('remove'),
                 previous: $(this).data('previous'),
             }
-        })
+        }) 
     })
 </script>
 

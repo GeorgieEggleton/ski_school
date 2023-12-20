@@ -32,7 +32,7 @@ def add_to_bag(request, item_id):
         bag[lesson] = {"quantity": quantity, 
                         "students" :[] 
                         } 
-        messages.success(request, f'Added {lesson} to your bag') 
+        messages.success(request, f'Added {lesson_whole} to your bag') 
     
     request.session['bag'] = bag 
     
