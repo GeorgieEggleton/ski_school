@@ -256,3 +256,5 @@ The styling as not as polished as I would like. Unfortunately I ran out of time 
 - Previous order history is not suitably styled for mobile devices. 
 -	There is a small point between the desktop and the mobile view where there text is the wrong size, I believe this only happens in DevTools responsive mode when pulling the screen size in. On all mobile devices I have tested it displays correctly. 
 
+# Future Features
+I had initially intended to include the option to book add ons such as lift passes and equipment hire but due to the time restrictions was unable to add this. I think this would be a nice feature to add in the future

@@ -53,6 +53,10 @@ def product_page(request):
 def payment_successful(request):
 	if request.user.is_authenticated:
 		
+		try:
+			profile = Profile.objects.get(user=request.user)
+		except:
+			profile = []
 		customer = ''
 		stripe.api_key = settings.STRIPE_SECRET_KEY
 		checkout_session_id = request.GET.get('session_id', None)
@@ -94,6 +98,7 @@ def payment_successful(request):
 				{'bag_contents': formatted_bag,
 				'order_number': order.id,
 				'stripe_PID' : checkout_session_id,
+				'user' :  order.fullname = profile.fullname,
 				}),
 			from_email=settings.EMAIL_HOST_USER,
 			recipient_list=[request.user.email],
