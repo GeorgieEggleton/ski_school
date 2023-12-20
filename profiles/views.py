@@ -6,26 +6,31 @@ from lessons.models import Student
 from django.contrib import messages
 
 def profile_creation(request):
-	profile_form = Profile_Form()
-	associated_students = Student.objects.filter(userAccount = request.user)
-	try:
-		profile_name = get_object_or_404(Profile, user=request.user)
-		profile_form_entry = {
-					'full_name' : profile_name.full_name, 
-					'phone_number':profile_name.phone_number,
-                  	'street_address1':profile_name.street_address1, 
-					'street_address2':profile_name.street_address2,
-                  	'town_or_city':profile_name.town_or_city, 
-					'postcode':profile_name.postcode, 
-					'country':profile_name.country,
-                  	'county':profile_name.county,
-					}
-		profile_form = Profile_Form(profile_form_entry)
+	
+	if request.user.is_authenticated:
 		
-	finally:
-		context = {'Profile_Form' : profile_form,
-		'associated_students' : associated_students}
-		return render(request, 'profiles/profile.html', context)
+		profile_form = Profile_Form()
+		associated_students = Student.objects.filter(userAccount = request.user)
+		try:
+			profile_name = get_object_or_404(Profile, user=request.user)
+			profile_form_entry = {
+						'full_name' : profile_name.full_name, 
+						'phone_number':profile_name.phone_number,
+						'street_address1':profile_name.street_address1, 
+						'street_address2':profile_name.street_address2,
+						'town_or_city':profile_name.town_or_city, 
+						'postcode':profile_name.postcode, 
+						'country':profile_name.country,
+						'county':profile_name.county,
+						}
+			profile_form = Profile_Form(profile_form_entry)
+			
+		finally:
+			context = {'Profile_Form' : profile_form,
+			'associated_students' : associated_students}
+			return render(request, 'profiles/profile.html', context)
+	else:
+		return redirect('account_login')
 
 
 def profile_update(request):
@@ -107,8 +112,14 @@ def add_student(request):
     return redirect(redirect_url)
 
 def delete_student(request, student_id):
-	
-	#if student_id:
-#		try:
+	if request.user.is_authenticated:
+		if student_id:
+			try:
+				student = get_object_or_404(Student, id=student_id).delete()
+				message.info(request, 'Student Deleted')
+			except:
+				messages.error(request, 'Unable to delete student')		
 			
-	return redirect(profile_creation)
+		return redirect(profile_creation)
+	else:
+		return redirect('account_login')

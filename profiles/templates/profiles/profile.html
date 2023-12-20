@@ -19,24 +19,23 @@
     <div class="col-6 mx-auto">
         <div class="text-center">
             <form class="d-inline" action="{% url 'profile_update' %}" method="POST">
-            <p class="overview-label">Name: <span class="overview-info"></span>
-                {{ Profile_Form.full_name | as_crispy_field}}</p>
-            <p class="overview-label center-block">Phone Number: <span class="overview-info">
-                    {{ Profile_Form.phone_number | as_crispy_field }}</span></p>
-            <p class="overview-label">Address: <span class="overview-info">
-                    {{ Profile_Form.street_address1 | as_crispy_field }}</span></p>
-            <p class="overview-label" class="overview-info">
-                {{ Profile_Form.street_address2 | as_crispy_field }}</p>
-            <p class="overview-info">{{ Profile_Form.street_address2 | as_crispy_field }}</p>
-            <p class="overview-info">{{ Profile_Form.town_or_city | as_crispy_field }}</p>
-            <p class="overview-info">{{ Profile_Form.county | as_crispy_field }}</p>
-            <p class="overview-info">{{ Profile_Form.postcode | as_crispy_field }}</p>
-            <p class="overview-info">{{ Profile_Form.country | as_crispy_field }}</p>
-            
+                <p class="overview-label">Name: <span class="overview-info"></span>
+                    {{ Profile_Form.full_name | as_crispy_field}}</p>
+                <p class="overview-label center-block">Phone Number: <span class="overview-info">
+                        {{ Profile_Form.phone_number | as_crispy_field }}</span></p>
+                <p class="overview-label">Address: <span class="overview-info">
+                        {{ Profile_Form.street_address1 | as_crispy_field }}</span></p>
+                <p class="overview-label" class="overview-info">
+                    {{ Profile_Form.street_address2 | as_crispy_field }}</p>
+                <p class="overview-info">{{ Profile_Form.street_address2 | as_crispy_field }}</p>
+                <p class="overview-info">{{ Profile_Form.town_or_city | as_crispy_field }}</p>
+                <p class="overview-info">{{ Profile_Form.county | as_crispy_field }}</p>
+                <p class="overview-info">{{ Profile_Form.postcode | as_crispy_field }}</p>
+                <p class="overview-info">{{ Profile_Form.country | as_crispy_field }}</p>
+
                 {% csrf_token %}
-                <button type="submit" name="blogpost_id" value="delete" class="btn-like btn-edit">
-                    <p class="subtext">Edit <i class="fa-solid fa-pencil"></i></p>
-                </button>
+                <input type="submit" name="blogpost_id" value="Update Profile" class="btn btn-outline-black mb-5">
+                </input>
             </form>
 
         </div>
@@ -45,47 +44,70 @@
 
 <div class="short-strip"></div>
 
-<h4 class="overview-heading">Your associated students</h4>
+<div class="row">
+    <div class="col-12">
+        <div class="text-center">
+            <h3 class="overview-heading">Your associated students</h3>
 
-<div>
-    {% for associated_student in associated_students %}
-    <a class="text"> {{ associated_student.first_name}} {{ associated_student.last_name}}
-        {{ associated_student.dob }} </a>
+            <div class="text-center">
+                {% for associated_student in associated_students %}
+                <div class="row col-10 offset-3">
+                    <h5 class="text"> {{ associated_student.first_name}}
+                    </h5>
+                    <h5 class="ml-2">{{ associated_student.last_name}} </h5>
+                    <h5 class="ml-3"> - Date of Birth: {{ associated_student.dob }} </h5>
+                    <div id="delete_student " class="text-red ml-1 side_slide">
+                        <i class="fa-solid fa-solid fa-trash text-red pointer"></i>
+                    </div>
+                    <a href="{% url 'delete_student' associated_student.id %}"
+                        class=" side-slider btn btn-outline-black rounded-0 ml-3 mr-3 pl-1 pr-1">
+                        Are you sure?
+                        <i href="{% url 'delete_student' associated_student.id %}"
+                            class="fa-solid fa-check pointer"></i>
+                    </a>
 
-        <div id="delete_student" class="col-sm-8 offset-1 mb-2 text-red">
-            <i class="fa-solid fa-solid fa-trash text-red pointer"></i>Delete Student </div>
-    <form class="d-inline" action="#" method="POST">
-        {% csrf_token %}
+                    <div id="edit_student" class=" ml-1">
+                        <i class="fa-solid fa-solid fa-pencil pointer add_student"></i>
+                        <div id="student_entry_panel" class="slider col-sm-12">
+                            <form class="form" method="POST" action="{% url 'add_student' %}">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <input name="first_name" class="col-sm-3 ml-5" type="text" value="{{ associated_student.first_name}}">
+                                    </input>
+                                    <input name="last_name" class="col-sm-3 ml-1" type="text" value="{{ associated_student.last_name}}">
+                                    </input>
+                                    <input name="Date of Birth" class="col-sm-3 ml-1" type="date" value="{{ associated_student.dob }}">
+                                    </input>
+                                    <input type="submit" class="btn btn-outline-black ml-1" value="Save"></input>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
 
-    </form>
-
-    <form class="d-inline" action="#" method="GET">
-        {% csrf_token %}
-        <a> edit student details </a>
-        <button type="submit" name="blogpost_id" value="delete" class="btn-like"><i
-                class="fa-solid fa-pencil"></i></button>
-    </form>
-</div>
-{% endfor %}
-<div id="add_student" class="col-sm-8 offset-1 mb-2 add_student"><i
-    class="fa-solid fa-circle-plus text-green pointer"></i> Add another student </div>
-<div id="student_entry_panel" class="slider col-sm-10 offset-1">
-<form class="form" method="POST" action="{% url 'add_student' %}">
-    {% csrf_token %}
-    <div class="row">
-        <input name="first_name" class="col-sm-3 offset-1" type="text" value="First Name">
-        </input>
-        <input name="last_name" class="col-sm-3 offset-1" type="text" value="Last Name">
-        </input>
-        <input name="age" class="col-sm-3 offset-1" type="date" value="1">
-        </input>
+                </div>
+                {% endfor %}
+            </div>
+            <div id="add_student" class="col-sm-8 offset-1 mb-2 add_student"><i
+                    class="fa-solid fa-circle-plus text-green pointer"></i> Add another student </div>
+            <div id="student_entry_panel" class="slider col-sm-10 offset-1">
+                <form class="form" method="POST" action="{% url 'add_student' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <input name="first_name" class="col-sm-3 offset-1" type="text" value="First Name">
+                        </input>
+                        <input name="last_name" class="col-sm-3 offset-1" type="text" value="Last Name">
+                        </input>
+                        <input name="age" class="col-sm-3 offset-1" type="date" value="1">
+                        </input>
+                    </div>
+                    <div class="btn col-sm-1 offset-11">
+                        <input type="submit" class="btn btn-outline-black" value="Save">
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="btn col-sm-1 offset-11">
-        <input type="submit" class="btn btn-outline-black" value="Save">
-    </div>
-</form>
 </div>
-
 {% endblock %}
 
 {% block postloadjs %}
@@ -94,4 +116,11 @@
         $(this).next().slideToggle("slow");
     })
 </script>
+
+<script type="text/javascript">
+    $('.side_slide').click(function (e) {
+        $(this).next().animate({ width: 'toggle' });
+    })
+</script>
+
 {% endblock %}

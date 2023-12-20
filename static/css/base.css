@@ -38,7 +38,13 @@ hr{
 }
 
 .slider{
-    padding: 50px;
+    padding: 10px;
+    display: none;
+    border: 2px solid black;
+}
+
+.side-slider{
+    padding: 0px;
     display: none;
     border: 2px solid black;
 }
