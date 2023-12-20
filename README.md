@@ -233,6 +233,7 @@ I have included detailed meta tags in the <head> of the html with a combination 
 
 ## CREDITS
 I derived a lot of inspiration for the project from the Boutique Ado walkthrough project, provided by Code institute. 
+
 I used the following tutorial to add the Mailchip signUp box - https://testdriven.io/blog/django-mailchimp/
 
 Images have been sourced from various locations including my own collection and google images. I have ensured any images taken from Google have free commercial rights. 
@@ -241,13 +242,15 @@ Images have been sourced from various locations including my own collection and 
 
 
 # Known Bugs
+### Form Validation
 If age is over 16 an error should be thrown to not allow booking to a child lesson 
 
 ### Chrome 
 On testing in Chorme after deployment and number of bugs were found. These include:-
-Jquery is not working in Chrome. This means that the Add Student dropdown feature is not stopping the user signing the same student up for multiple lesson. 
+Jquery is not working in Chrome. This means that the "Add Student" dropdown feature is not stopping the user signing the same student up for multiple lesson. I spent a significant amount of time trying to fix this with the help of a Code Institute tutor but they had not seen this issue before and were unable to assist. 
+Newsletter - The newsleeter signup form is not working in chrome. 
 
-
+### Styling
 The styling as not as polished as I would like. Unfortunately I ran out of time to do anything further with this. 
 -	Home page paragrapgh text is too small on Mobile devices
 -	There is a small point between the desktop and the mobile view where there text is the wrong size, I believe this only happens in DevTools responsive mode when pulling the screen size in. On all mobile devices I have tested it displays correctly. 
