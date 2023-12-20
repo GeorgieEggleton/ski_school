@@ -253,5 +253,6 @@ Newsletter - The newsleeter signup form is not working in chrome.
 ### Styling
 The styling as not as polished as I would like. Unfortunately I ran out of time to do anything further with this. 
 -	Home page paragrapgh text is too small on Mobile devices
+- Previous order history is not suitably styled for mobile devices. 
 -	There is a small point between the desktop and the mobile view where there text is the wrong size, I believe this only happens in DevTools responsive mode when pulling the screen size in. On all mobile devices I have tested it displays correctly. 
 
