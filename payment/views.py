@@ -42,7 +42,10 @@ def product_page(request):
 			cancel_url = "https://" + settings.ALLOWED_HOSTS[0] + '/payment/payment_cancelled', 
 			)
 		return redirect(checkout_session.url, code=303)
-		
+	else: 
+		messages.error(request, f'please log in') 
+		return redirect('account_login')
+	
 def payment_successful(request):
 	if request.user.is_authenticated:
 		

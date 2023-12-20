@@ -3,8 +3,11 @@ from django.contrib import messages
 from lessons.models import LessonType, Lesson, Student 
 
 def view_bag(request): 
-
-    return render(request, 'bag/bag.html') 
+    if request.user.is_authenticated:
+        return render(request, 'bag/bag.html') 
+    else: 
+        messages.error(request, f'please log in') 
+        return redirect('account_login')
 
 def add_to_bag(request, item_id): 
 

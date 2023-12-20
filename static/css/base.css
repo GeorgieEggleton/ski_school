@@ -203,6 +203,10 @@ footer {
     color: #fff; !important;
 }
 
+.text-red{
+    color: red !important;
+ }
+
 .text-green{
    color: #28a745 !important;
 }

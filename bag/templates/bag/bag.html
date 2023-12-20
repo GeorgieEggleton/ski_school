@@ -67,18 +67,18 @@
 
                         <select class="student-update form-control col-sm-6" name="selected_students "
                             id='select_students'>
-                            <option value="{{booked_student.id}}" class="student-selection"
+                            <option value="{{booked_student.id}}" class="student_selection"
                                 data-lesson_id="{{ item.lesson_id }}" data-remove="True"> de-select
                             </option>
                             {% for student in item.associated_students %}
-                            <option value="{{ student.id }}" class="student-selection col-sm-6"
+                            <option value="{{ student.id }}" class="student_selection col-sm-6"
                                 data-previous="{{booked_student.id}}" data-lesson_id="{{ item.lesson_id }}">
                                 {{student.first_name }}
                                 {{student.last_name }}
                             </option>
                             {% endfor %}
 
-                            <option value="{{booked_student.id}}" class="student-selection"
+                            <option value="{{booked_student.id}}" class="student_selection"
                                 data-lesson_id="{{ item.lesson_id }}" selected>
                                 {{ booked_student.first_name}}
                                 {{booked_student.last_name }}
@@ -109,12 +109,12 @@
 
                     <select class="student-update form-control rounded-0 col-sm-6 offset-1 mb-1"
                         name="selected_students_{{ i }}" id='select_students'>
-                        <option value="" class="student-selection coll-sm-6" selected> Select Student from dropdown:
+                        <option value="" class="student_selection coll-sm-6" selected> Select Student from dropdown:
                         </option>
 
                         {% for student in item.associated_students %}
 
-                        <option value="{{ student.id }}" class="student-selection"
+                        <option value="{{ student.id }}" class="student_selection"
                             data-lesson_id="{{ item.lesson_id }}"> {{ student.first_name }}
                             {{student.second_name}}
                         </option>
@@ -192,7 +192,7 @@
 {{ block.super }}
 
 <script type="text/javascript">
-    $('.student-selection').click(function (e) {
+    $('.student_selection').click(function (e) {
         $.ajax({
             type: 'POST',
             url: 'update_student_pulldown/',

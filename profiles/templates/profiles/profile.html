@@ -52,31 +52,11 @@
     <a class="text"> {{ associated_student.first_name}} {{ associated_student.last_name}}
         {{ associated_student.dob }} </a>
 
-    <div id="add_student" class="col-sm-8 offset-1 mb-2 add_student"><i
-            class="fa-solid fa-circle-plus text-green pointer"></i> Add another student </div>
-    <div id="student_entry_panel" class="slider col-sm-10 offset-1">
-        <form class="form" method="POST" action="{% url 'add_student' %}">
-            {% csrf_token %}
-            <div class="row">
-                <input name="first_name" class="col-sm-3 offset-1" type="text" value="First Name">
-                </input>
-                <input name="last_name" class="col-sm-3 offset-1" type="text" value="Last Name">
-                </input>
-                <input name="age" class="col-sm-3 offset-1" type="date" value="1">
-                </input>
-            </div>
-            <div class="btn col-sm-1 offset-11">
-                <input type="submit" class="btn btn-outline-black" value="Save">
-            </div>
-        </form>
-    </div>
-
-
+        <div id="delete_student" class="col-sm-8 offset-1 mb-2 text-red">
+            <i class="fa-solid fa-solid fa-trash text-red pointer"></i>Delete Student </div>
     <form class="d-inline" action="#" method="POST">
         {% csrf_token %}
-        <a> Delete Student </a>
-        <button type="submit" name="blogpost_id" value="delete" class="btn-like">
-            <i class="fa-solid fa-trash"></i></button>
+
     </form>
 
     <form class="d-inline" action="#" method="GET">
@@ -87,6 +67,24 @@
     </form>
 </div>
 {% endfor %}
+<div id="add_student" class="col-sm-8 offset-1 mb-2 add_student"><i
+    class="fa-solid fa-circle-plus text-green pointer"></i> Add another student </div>
+<div id="student_entry_panel" class="slider col-sm-10 offset-1">
+<form class="form" method="POST" action="{% url 'add_student' %}">
+    {% csrf_token %}
+    <div class="row">
+        <input name="first_name" class="col-sm-3 offset-1" type="text" value="First Name">
+        </input>
+        <input name="last_name" class="col-sm-3 offset-1" type="text" value="Last Name">
+        </input>
+        <input name="age" class="col-sm-3 offset-1" type="date" value="1">
+        </input>
+    </div>
+    <div class="btn col-sm-1 offset-11">
+        <input type="submit" class="btn btn-outline-black" value="Save">
+    </div>
+</form>
+</div>
 
 {% endblock %}
 
