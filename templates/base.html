@@ -8,6 +8,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+        content="Ski & Snowboard school based in the Swiss Alps. Providing snow-sport tuition for all ages & abilities">
+
+    <meta name="keywords"
+        content="ski, snowboard, ski lessons, snowboard lessons, childrens ski lessons, 
+    adults ski lessons childrens snowboard lessons, adults snowboard lessons, advanced ski lessons, beginner ski lessons, 
+    advanced snowboard lessons, beginner snowboard lessons, private ski lessons, group ski lessons, private snowboard lessons, 
+    group snowboard lessons ">
+
     {% endblock %}
 
     {% block extra_meta %}
@@ -18,7 +27,7 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&display=swap">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    
+
     {% endblock %}
 
     {% block extra_css %}
@@ -39,7 +48,7 @@
 
     {% block extra_js %}
     {% endblock %}
-    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}" >
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
     <title>Alps Ski School {% block extra_title %}{% endblock %}</title>
 </head>
 
@@ -118,21 +127,21 @@
 
     </header>
     {% if messages %}
-        <div class="message-container">
-            {% for message in messages %}
-                {% with message.level as level %}
-                    {% if level == 40 %}
-                        {% include 'includes/toasts/toast_error.html' %}
-                    {% elif level == 30 %}
-                        {% include 'includes/toasts/toast_warning.html' %}
-                    {% elif level == 25 %}
-                        {% include 'includes/toasts/toast_success.html' %}
-                    {% else %}
-                        {% include 'includes/toasts/toast_info.html' %}
-                    {% endif %}
-                {% endwith %}
-            {% endfor %}
-        </div>
+    <div class="message-container">
+        {% for message in messages %}
+        {% with message.level as level %}
+        {% if level == 40 %}
+        {% include 'includes/toasts/toast_error.html' %}
+        {% elif level == 30 %}
+        {% include 'includes/toasts/toast_warning.html' %}
+        {% elif level == 25 %}
+        {% include 'includes/toasts/toast_success.html' %}
+        {% else %}
+        {% include 'includes/toasts/toast_info.html' %}
+        {% endif %}
+        {% endwith %}
+        {% endfor %}
+    </div>
     {% endif %}
     {% block page_header %}
     {% endblock %}
@@ -149,47 +158,55 @@
         <div class="row">
             <div class="col-lg-2 offset-1 pt-3">
                 <p class="logo-font text-white">Contact</p>
-                <p href = "tel:+4111122233344 class=" class = "text-white "><span class="icon"><i class="fas fa-phone fa-lg text-white pr-2"></i></span> +41
+                <p href="tel:+4111122233344 class=" class="text-white "><span class="icon"><i
+                            class="fas fa-phone fa-lg text-white pr-2"></i></span> +41
                     111 222 333 44</p>
-                <p  href=mailto:lesson@alpsskischool.com class="text-white"><span class="icon"><i class="fas fa-envelope fa-lg text-white pr-2"></i></span>
+                <p href=mailto:lesson@alpsskischool.com class="text-white"><span class="icon"><i
+                            class="fas fa-envelope fa-lg text-white pr-2"></i></span>
                     lesson@alpsskischool.com</p>
-                <p class="text-white"><span class="icon"><i class="fas fa-solid fa-house fa-lg text-white pr-2"></i></span>
+                <p class="text-white"><span class="icon"><i
+                            class="fas fa-solid fa-house fa-lg text-white pr-2"></i></span>
                     Alps Ski
                     School, Alps,
                     Switzerland, Europe</p>
             </div>
-    
+
             <div class="col-lg-2 offset-1 pt-3">
                 <p class="logo-font text-white">Social</p>
-                <p href="https://www.facebook.com/profile.php?id=61554427935529" rel="noopener" target="_blank" class="text-white mb-2"><span class="icon mb-2"><i class="fa-brands fa-facebook fa-lg text-white pr-2"></i>
+                <p href="https://www.facebook.com/profile.php?id=61554427935529" rel="noopener" target="_blank"
+                    class="text-white mb-2"><span class="icon mb-2"><i
+                            class="fa-brands fa-facebook fa-lg text-white pr-2"></i>
                         </i></span> Facebook</p>
-                <p class="text-white mb-2"><span class="icon mb-2"><i class="fa-brands fa-instagram text-white pr-2"></i></span>
+                <p class="text-white mb-2"><span class="icon mb-2"><i
+                            class="fa-brands fa-instagram text-white pr-2"></i></span>
                     Instagram</p>
-                <p class="text-white mb-2"><span class="icon mb-2"><i class="fa-brands fa-youtube fa-lg text-white pr-2"></i></span>
+                <p class="text-white mb-2"><span class="icon mb-2"><i
+                            class="fa-brands fa-youtube fa-lg text-white pr-2"></i></span>
                     YouTube</p>
             </div>
-    
+
             <div class="col-lg-4 offset-1 pt-3">
                 <p class="logo-font text-white">Newsletter</p>
-                <p class="text-white"> Signup to our Newsletter to keep up to date with everything at Alps Snow Schools</p>
+                <p class="text-white"> Signup to our Newsletter to keep up to date with everything at Alps Snow Schools
+                </p>
                 <form class="form " action="{% url 'subscribe'%}" method="POST">
                     {% csrf_token %}
                     {{ newsletter_form.email | as_crispy_field }}
-                    <input type="hidden" name="redirect_url" value="{{ request.path }}">  
-                    <input type="submit" class="btn-outline-white" value="Sign up">               
+                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                    <input type="submit" class="btn-outline-white" value="Sign up">
                 </form>
             </div>
-    
-    
+
+
             <div class="col-12">
                 <p class="text-white text-center">
                     © Alps Ski School 2023
                 </p>
             </div>
-    
+
         </div>
-    
-    
+
+
     </footer>
 </body>
 

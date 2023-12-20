@@ -189,3 +189,9 @@ Git – Regular commit messages were used throughout development using the follo
 
 # Testing
 
+![Testing-Desktop Menu](/media/ReadMe_images/testing_desktop_menu.png)
+![Testing-Mobile Menu](/media/ReadMe_images/testing_mobile_menu.png)
+![Testing-Footer](/media/ReadMe_images/testing_footer.png)
+![Testing-Registration](/media/ReadMe_images/testing_registration.png)
+![Testing-Lesson Details](/media/ReadMe_images/testing_lesson_details.png)
+![Testing-Summary](/media/ReadMe_images/testing_summery.png)

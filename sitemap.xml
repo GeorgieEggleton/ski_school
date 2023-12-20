@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/accounts/signup/</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/accounts/login/</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/?type=Ski,Child,group</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/?type=Ski,Child,private</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/?type=Ski,Adult,group</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/?type=Ski,Adult,private</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/?type=Snowboard,Child,group</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/?type=Snowboard,Child,private</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/?type=Snowboard,Adult,group</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/?type=Snowboard,Adult,private</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/?type=Ski,,</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/?type=Snowboard,,</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/accounts/password/reset/</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/11</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/10</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/12</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/7</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/8</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/9</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/4</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/5</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/6</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/2</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/3</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/1</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/22</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/23</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/24</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/19</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/20</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/21</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/16</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/17</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/18</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/13</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/14</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://alps-snow-school-4dd405a355b2.herokuapp.com/lessons/15</loc>
+  <lastmod>2023-12-20T02:00:34+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
+</urlset>
