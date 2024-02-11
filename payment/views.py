@@ -89,7 +89,7 @@ def payment_successful(request):
 				booked_student.orderlineitem_set.add(orderlineitem)
 				if lesson.remaining_capacity > 0: lesson.remaining_capacity -= 1 
 				lesson.save()
-		
+		"""
 		send_mail(
 			subject = render_to_string('payment/confirmation_emails/confirmation_email_subject.txt',
 				{'order_number' : order.id}),
@@ -103,7 +103,7 @@ def payment_successful(request):
 			from_email=settings.EMAIL_HOST_USER,
 			recipient_list=[request.user.email],
 			)
-
+		"""
 		request.session['bag'] = {}
 		messages.success(request, f'Payment Successful an email has been sent to {request.user.email}') 
 		return redirect('home')

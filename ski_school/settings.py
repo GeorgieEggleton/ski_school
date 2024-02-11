@@ -33,7 +33,7 @@ ALLOWED_HOSTS = [os.environ.get('BASE_URL', ''),
                 'alps-snow-school.heroku.com', 
                 'localhost', 
                 'alps-snow-school-4dd405a355b2.herokuapp.com',
-                '8000-georgieegglet-skischool-0324olqwrk5.ws-eu107.gitpod.io']
+                '8000-georgieegglet-skischool-liguqyfyenm.ws-eu108.gitpod.io']
 
 
 # Application definition
