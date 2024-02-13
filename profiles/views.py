@@ -12,7 +12,7 @@ def profile_creation(request):
 		profile_form = Profile_Form()
 		associated_students = Student.objects.filter(userAccount = request.user)
 		try:
-			profile_name = get_object_or_404(Profile, user=request.user)
+			profile_name = Profile.objects.get(user=request.user)  #profile_name = get_object_or_404(Profile, user=request.user)
 			profile_form_entry = {
 						'full_name' : profile_name.full_name, 
 						'phone_number':profile_name.phone_number,
