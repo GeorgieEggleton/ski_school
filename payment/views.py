@@ -66,7 +66,10 @@ def payment_successful(request):
 		except Order.DoesNotExist: 
 			order = Order.objects.create(user=request.user)
 		order.stripe_pid = checkout_session_id 
-		order.fullname = profile.fullname
+		if session["customer_details"]["name"] == '':
+			order.full_name = profile.full_name
+		else:
+			order.full_name = session["customer_details"]["name"]
 		order.country = session["customer_details"]["address"]["country"] or ''
 		order.postcode = session["customer_details"]["address"]["postal_code"] or ''
 		order.email = session["customer_details"]["email"]
