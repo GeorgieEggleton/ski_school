@@ -38,7 +38,7 @@ class Student(models.Model):
     userAccount = models.ForeignKey(User, null = True, blank = True, on_delete=models.SET_NULL)
 
     def __str__(self):
-        return f"{self.first_name}  {self.last_name} - {self.userAccount.email}"
+        return f"{self.first_name}  {self.last_name}" # - {self.userAccount.email}"
 
 class Lesson(models.Model):
     students = models.ManyToManyField(Student, blank=True)

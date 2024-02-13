@@ -24,7 +24,8 @@ def profile_creation(request):
 						'county':profile_name.county,
 						}
 			profile_form = Profile_Form(profile_form_entry)
-			
+		
+
 		finally:
 			context = {'Profile_Form' : profile_form,
 			'associated_students' : associated_students}
