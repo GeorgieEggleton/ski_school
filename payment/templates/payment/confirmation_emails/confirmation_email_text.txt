@@ -1,16 +1,14 @@
 Dear {{ user }}
 
-Thank you for booking with Alps Snow School. 
+    Thank you for booking with Alps Snow School. 
 
-Your order number is:-
+    Your order number is:-  {{ order_number }}
 
-{{ order_number }}
+    and Stripe reciept number is:-  {{ stripe_PID }}
 
-and Stripe reciept number is:-
+    If you have any questions please do not hesitate to contact us. 
 
-{{ stripe_PID }}
-
-If you have any questions please do not hesitate to contact us. 
+    To see your order follow this link: https://alps-snow-school-4dd405a355b2.herokuapp.com/profiles/order_history/
 
 Kind regards
 
