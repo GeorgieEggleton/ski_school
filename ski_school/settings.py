@@ -249,3 +249,10 @@ EMAIL_USE_TLS = True
 MAILCHIMP_API_KEY = os.getenv('MAILCHIMP_KEY', '')
 MAILCHIMP_REGION = 'us21'
 MAILCHIMP_MARKETING_AUDIENCE_ID = 'a1f8eb2626'
+
+
+#"MonkeyPatch" to workaround kniown issue with Django 5 and the country generatior https://code.djangoproject.com/ticket/35046#comment:4
+from django_countries.widgets import LazyChoicesMixin
+
+LazyChoicesMixin.get_choices = lambda self: self._choices
+LazyChoicesMixin.choices = property(LazyChoicesMixin.get_choices, LazyChoicesMixin.set_choices)
