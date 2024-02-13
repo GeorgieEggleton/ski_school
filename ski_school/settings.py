@@ -35,6 +35,8 @@ ALLOWED_HOSTS = [os.environ.get('BASE_URL', ''),
                 'alps-snow-school-4dd405a355b2.herokuapp.com',
                 '8000-georgieegglet-skischool-liguqyfyenm.ws-eu108.gitpod.io']
 
+CSRF_TRUSTED_ORIGINS = ['https://8000-georgieegglet-skischool-liguqyfyenm.ws-eu108.gitpod.io']
+
 
 # Application definition
 
