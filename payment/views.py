@@ -98,7 +98,7 @@ def payment_successful(request):
 				{'bag_contents': formatted_bag,
 				'order_number': order.id,
 				'stripe_PID' : checkout_session_id,
-				'user' :  order.fullname,
+				'user' :  order.full_name,
 				}),
 			from_email=settings.EMAIL_HOST_USER,
 			recipient_list=[request.user.email],
