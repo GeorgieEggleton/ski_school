@@ -10,6 +10,7 @@ Dear {{ user }}
 
     To see your order follow this link: https://alps-snow-school-4dd405a355b2.herokuapp.com/profiles/order_history/
 
+
 Kind regards
 
 The Alps Snow School Team

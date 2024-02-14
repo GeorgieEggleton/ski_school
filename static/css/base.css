@@ -398,10 +398,7 @@ input[name='q']::placeholder {
         right: 0;
         left: 0;
         z-index: 1030;
-    }
-
-   
-
+    }  
 }
 
 /* pad the top a bit when navbar is collapsed on mobile */
@@ -438,4 +435,11 @@ input[name='q']::placeholder {
     }
 
     
+}
+
+/*Screens smaller than 700px*/
+@media only screen and (max-width: 700px) {
+.home-para{
+    font-size: 16px;
+}
 }
