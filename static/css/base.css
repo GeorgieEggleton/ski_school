@@ -437,8 +437,8 @@ input[name='q']::placeholder {
     
 }
 
-/*Screens smaller than 700px*/
-@media only screen and (max-width: 700px) {
+/*Screens smaller than 951px*/
+@media only screen and (max-width: 951px) {
 .home-para{
     font-size: 16px;
 }
