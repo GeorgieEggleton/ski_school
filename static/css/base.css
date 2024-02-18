@@ -258,6 +258,17 @@ input[name='q']::placeholder {
     width:50%;
 }
 
+form li {
+    color: red;
+    list-style-type: none;
+    font-size: small;
+}
+
+.helptext{
+    display: block;
+    font-size: small;
+}
+
 /* ------------------------------- bootstrap toasts */
 
 .message-container {
