@@ -203,6 +203,16 @@ Git – Regular commit messages were used throughout development using the follo
 ![Testing-Lesson Details](/media/ReadMe_images/testing_lesson_details.png)
 ![Testing-Summary](/media/ReadMe_images/testing_summery.png)
 
+I also used an HTML Validator to check all my html pages used valid and correct code. 
+
+![Validator-Screenshot-Home](/media/ReadMe_images/home-htmlvalidator.png)
+![Validator-Screenshot-Lessons](/media/ReadMe_images/lessons-htmlvalidator.png)
+![Validator-Screenshot-Lessondetails](/media/ReadMe_images/lessondetails-htmlvalidator.png)
+![Validator-Screenshot-Bag](/media/ReadMe_images/bag-htmlvalidator.png)
+![Validator-Screenshot-profile](/media/ReadMe_images/profiles-htmlvalidator.png)
+![Validator-Screenshot-OrderHistory](/media/ReadMe_images/orderhistory-htmlvalidator.png)
+
+
 # Business Plan, Marketing & SEO 
 
 Alps Snow School was designed and implemented to meet a gap in the snow sport tuition market. While conducting market research I found that a lot of the existing snow sport schools did not have options to book lessons online and a lot of the information was hard to find and over complicated.  
