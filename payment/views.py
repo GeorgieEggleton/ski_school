@@ -52,7 +52,6 @@ def product_page(request):
 	
 def payment_successful(request):
 	if request.user.is_authenticated:
-		
 		try:
 			profile = Profile.objects.get(user=request.user)
 		except:
@@ -61,10 +60,7 @@ def payment_successful(request):
 		stripe.api_key = settings.STRIPE_SECRET_KEY
 		checkout_session_id = request.GET.get('session_id', None)
 		session = stripe.checkout.Session.retrieve(checkout_session_id)
-		try:  
-			order = Order.objects.get(user=request.user)
-		except Order.DoesNotExist: 
-			order = Order.objects.create(user=request.user)
+		order = Order.objects.create(user=request.user)
 		order.stripe_pid = checkout_session_id 
 		if session["customer_details"]["name"] == '':
 			order.full_name = profile.full_name
