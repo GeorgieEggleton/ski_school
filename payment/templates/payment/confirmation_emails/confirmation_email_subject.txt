@@ -1,1 +1,1 @@
-Alps Ski Shool Order Number 
+Alps Ski Shool Order Number -  {{ order_number }}

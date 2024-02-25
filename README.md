@@ -314,9 +314,10 @@ Fixed font on home page paragraphs that were showing a very tiny font on mobile 
 
 
 Styling added to Allauth Pages.
-
+![login-Screenshot](/media/ReadMe_images/signin-screenshot.png)
+![Registration-Screenshot](/media/ReadMe_images/registration-screenshot.png)
 
 Updated domain name and display name in django so it shows on order confirmation emails.
 
-Added CSS styling so footer doesn’t sit so high on page on certain secreen sizes using a media query. 
+Added CSS styling so footer doesn’t sit so high on page on certain screen sizes. 
 
