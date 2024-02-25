@@ -268,3 +268,55 @@ The styling as not as polished as I would like. Unfortunately I ran out of time 
 
 # Future Features
 I had initially intended to include the option to book add ons such as lift passes and equipment hire but due to the time restrictions was unable to add this. I think this would be a nice feature to add in the future
+
+
+# Re-Submission 
+
+
+### Debug
+Set debug to DEBUG = 'DEVELOPMENT' in os.environ
+
+### E-commerce functionality not working
+The reason the e-commerce system was not working as expected was due to an error with the confirmation email. This was therefore throwing an error. 
+
+This error was due to an outdated version of Django being employed by project, returning "NoneType Error".  This was also stopping the website moving through to full confirmation of payment.  Update required up to latest versions of Django, Python, Allauth and CrispyForms. 
+
+
+However, on updating to Django 5.0 there was a known bug (bug report #35046) which causes and AtributeError against the BlankChoiseIterator object having no attribute ‘__len__’.  This resulted in the profile page throwing an error due to the presence of the countries field selector in the form.  This was solved using a Monkey Patch suggested in the Django official ticket which was made up of three lines of code in the settings.py file.   
+
+
+### Confirmation e-mails 
+The confirmation email is now sending correctly on successful purchase and the "Toast" appears at the top to let the user know the payment was successful. 
+
+
+### Display of Orders and Payment 
+Order and OrderLineItem models have now been registered in the Admin panel allowing the user to access order and payment details of the user.
+
+
+### 404 Page
+The 404 page is present and now viewable with debug not on. 
+![Custom 404](/media/ReadMe_images/404_screenshot.png)
+
+
+### Validation tools
+All the html has now been passed the validator. 
+![Validator-Screenshot-Home](/media/ReadMe_images/home-htmlvalidator.png)
+![Validator-Screenshot-Lessons](/media/ReadMe_images/lessons-htmlvalidator.png)
+![Validator-Screenshot-Lessondetails](/media/ReadMe_images/lessondetails-htmlvalidator.png)
+![Validator-Screenshot-Bag](/media/ReadMe_images/bag-htmlvalidator.png)
+![Validator-Screenshot-profile](/media/ReadMe_images/profiles-htmlvalidator.png)
+![Validator-Screenshot-OrderHistory](/media/ReadMe_images/orderhistory-htmlvalidator.png)
+
+
+### Other bug fixes
+Fixed font on home page paragraphs that were showing a very tiny font on mobile devices. 
+![Home-Mobile-Screenshot](/media/ReadMe_images/homepage-screenshot-mobile.PNG)
+
+
+Styling added to Allauth Pages.
+
+
+Updated domain name and display name in django so it shows on order confirmation emails.
+
+Added CSS styling so footer doesn’t sit so high on page on certain secreen sizes using a media query. 
+
