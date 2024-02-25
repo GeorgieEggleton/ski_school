@@ -309,6 +309,10 @@ All the html has been passed the validator.
 ![Validator-Screenshot-profile](/media/ReadMe_images/profiles-htmlvalidator.png)
 ![Validator-Screenshot-OrderHistory](/media/ReadMe_images/orderhistory-htmlvalidator.png)
 
+There are still 4 x errors on the singup page. These come from AllAuth's code which I do not have access to and so I was unable to resolve them by manipulating their templates.
+
+![Validator-Screenshot-signup](/media/ReadMe_images/sign-up-validator.png)
+
 
 ### Other bug fixes
 Fixed font on home page paragraphs that were showing a very tiny font on mobile devices. 

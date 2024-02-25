@@ -24,7 +24,8 @@ class OrderAdmin(admin.ModelAdmin):
                 'user', 
                 'stripe_pid',)
 
-    list_display = ('stripe_pid', 
+    list_display = ('id',
+                    'stripe_pid', 
                     'dateTimeCreated', 
                     'full_name',
                     'order_total',)
