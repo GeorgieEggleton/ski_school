@@ -8,11 +8,11 @@
 <div class="container">
 
   <div class="mx-auto mt-3">
-    <h1 class="text-center">{% trans "Sign Up" %}</h1>
-    <p class="text-center">{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign
+    <h1 class="text-center"> {% trans "Sign Up" %}</h1>
+    <p class="text-center"> {% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign
         in</a>.{%endblocktrans %}</p>
 
-    <form class="signup text-center  mb-3" id="signup_form" method="post" action="{% url 'account_signup' %}">
+    <form class="signup text-center mb-3" id="signup_form" method="post" action="{% url 'account_signup' %}">
       {% csrf_token %}
       {{ form.as_p }}
       {% if redirect_field_value %}

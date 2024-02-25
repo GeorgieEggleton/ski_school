@@ -287,6 +287,8 @@ However, on updating to Django 5.0 there was a known bug (bug report #35046) whi
 
 ### Confirmation e-mails 
 The confirmation email is now sending correctly on successful purchase and the "Toast" appears at the top to let the user know the payment was successful. 
+![email-confirmation](/media/ReadMe_images/confirmation-email.png)
+![payment-success](/media/ReadMe_images/payment-success.png)
 
 
 ### Display of Orders and Payment 
@@ -299,7 +301,7 @@ The 404 page is present and now viewable with debug not on.
 
 
 ### Validation tools
-All the html has now been passed the validator. 
+All the html has been passed the validator. 
 ![Validator-Screenshot-Home](/media/ReadMe_images/home-htmlvalidator.png)
 ![Validator-Screenshot-Lessons](/media/ReadMe_images/lessons-htmlvalidator.png)
 ![Validator-Screenshot-Lessondetails](/media/ReadMe_images/lessondetails-htmlvalidator.png)
@@ -314,10 +316,18 @@ Fixed font on home page paragraphs that were showing a very tiny font on mobile 
 
 
 Styling added to Allauth Pages.
+
 ![login-Screenshot](/media/ReadMe_images/signin-screenshot.png)
 ![Registration-Screenshot](/media/ReadMe_images/registration-screenshot.png)
 
 Updated domain name and display name in django so it shows on order confirmation emails.
 
 Added CSS styling so footer doesn’t sit so high on page on certain screen sizes. 
+
+
+Email varification now working 
+
+![email-varification-screenshot](/media/ReadMe_images/email-varification-screenshot.png)
+![email-varification-screenshot2](/media/ReadMe_images/email-varification-screenshot2.png)
+
 

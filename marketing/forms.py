@@ -12,6 +12,7 @@ class EmailForm(forms.Form):
 
         self.fields['email'].widget.attrs['class'] = 'rounded-0'
         self.fields['email'].widget.attrs['placeholder'] = 'Insert Email Here'
+        self.fields['email'].widget.attrs['id'] = 'mailchimp'
        
 
 
