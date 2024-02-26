@@ -69,7 +69,7 @@ def payment_successful(request):
 		order.country = session["customer_details"]["address"]["country"] or ''
 		order.postcode = session["customer_details"]["address"]["postal_code"] or ''
 		order.email = session["customer_details"]["email"]
-		order.order_total = session["amount_total"]
+		order.order_total = session["amount_total"]/100
 		order.save()
 		
 		formatted_bag = bag_contents(request)
@@ -78,6 +78,7 @@ def payment_successful(request):
 				order = order,
 				lesson = (item['lesson']),
 				lineitem_total = (item['subTotal']),
+				students = (items['booked_students'])
 			)
 			for booked_student in item['booked_students']:				
 				booked_student = Student.objects.get(id=booked_student['id'])
