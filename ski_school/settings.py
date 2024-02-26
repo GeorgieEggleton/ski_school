@@ -25,8 +25,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-#DEBUG = 'DEVELOPMENT' in os.environ
+#DEBUG = True
+DEBUG = 'DEVELOPMENT' in os.environ
 
 ALLOWED_HOSTS = [os.environ.get('BASE_URL', ''),
                 'alps-snow-school.heroku.com', 
@@ -233,8 +233,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # stripe
 STRIPE_CURRENCY = 'gbp'
-#STRIPE_PUBLIC_KEY = 'pk_test_51OFgV1HNBgyzsvZ1qRisfwGEnGbMjo5DsdHGL3DgaVFZ8DISR7jUmuR3NwJxg9vjymJpdcejvHXAzvpVggxgHhHI00X7FF4L5H'
-#STRIPE_SECRET_KEY = 'sk_test_51OFgV1HNBgyzsvZ1nq4BCYeTfhplU16XeNByntCIyTpayOOvT2hAkmqDDTy11fiTIm6lAq3WKpQliLbA5BbviVti00a0p5rMbP' 
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
 
