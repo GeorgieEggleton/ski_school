@@ -77,8 +77,7 @@ def payment_successful(request):
 			orderlineitem = OrderLineItem.objects.create(
 				order = order,
 				lesson = (item['lesson']),
-				lineitem_total = (item['subTotal']),
-				students = (items['booked_students'])
+				lineitem_total = (item['subTotal'])
 			)
 			for booked_student in item['booked_students']:				
 				booked_student = Student.objects.get(id=booked_student['id'])
