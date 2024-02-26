@@ -29,7 +29,7 @@ def bag_contents(request):
                         lesson_bag_details["quantity"] = lesson.remaining_capacity
                 subTotal = lesson_bag_details["quantity"] * lesson.type.price 
                 total += subTotal
-
+                print(f"lesson bag details {lesson_bag_details}")
                 if request.user.is_authenticated:
                     booked_students = Student.objects.filter(pk__in= lesson_bag_details["students"]).values()       
                     remaining_students = [i for i in associated_students if i not in booked_students ] #takes booked_students away from associated_students

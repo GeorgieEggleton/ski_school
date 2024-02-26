@@ -18,7 +18,6 @@ def add_to_bag(request, item_id):
     redirect_url = request.POST.get('redirect_url') 
     bag = request.session.get('bag', {}) 
     lesson_whole = get_object_or_404(Lesson, pk=lesson) 
-
     if lesson in list(bag.keys()): 
         if bag[lesson]["quantity"] + quantity <= lesson_whole.remaining_capacity: 
             bag[lesson]["quantity"] += quantity 
@@ -82,16 +81,22 @@ def update_student_pulldown(request):
     previous = request.POST.get('previous') 
     selected_student_id = request.POST.get('selected_student_id') 
     student = get_object_or_404(Student, pk=selected_student_id) 
-
+    print(f"Student id {student}")
+    print(f"previous {previous}")
+    
     if remove == "True": 
         bag[lesson_id]["students"].remove(selected_student_id) 
 
     else: 
+        print(f"lessonId {lesson_id}")
         if lesson_id in list(bag.keys()): 
+            
             if len(bag[lesson_id]["students"]) <= bag[lesson_id]["quantity"]: 
                 if selected_student_id not in bag[lesson_id]["students"]: 
-                    if previous != None:  
+                    if previous != "":  
+                        print(f"i'm here")
                         bag[lesson_id]["students"].remove(previous) 
                     bag[lesson_id]["students"].append(selected_student_id) 
+    print(f"bag: {bag}")
     request.session['bag'] = bag 
     return render(request, 'bag/bag.html') 
