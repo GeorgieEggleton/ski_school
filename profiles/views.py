@@ -68,11 +68,15 @@ def order_history(request):
 		try:  
 			orders = Order.objects.filter(user=request.user)
 			for order in orders:
+				full_line_item = []
 				line_items_in_order = order.lineitems.all()
+				print(line_items_in_order)
 				for line_item_in_order in line_items_in_order:
 					full_line_item.append({'lineitem': line_item_in_order, 'students' : line_item_in_order.students.all()})
+					print(f"order {order.id}")
+					print(line_item_in_order)
 				full_orders.append({'order': order, 'lineitems': full_line_item })
-
+			print(f"full orders {full_orders}")
 			context = {
 				'full_orders' : full_orders,
 			}
